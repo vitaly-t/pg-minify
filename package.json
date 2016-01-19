@@ -1,7 +1,7 @@
 {
   "name": "pg-minify",
-  "version": "0.0.2",
-  "description": "Minify PostgreSQL scripts",
+  "version": "0.0.3",
+  "description": "Minifies PostgreSQL scripts.",
   "main": "lib/index.js",
   "scripts": {
     "test": "jasmine-node test",
