@@ -50,7 +50,7 @@ try {
 } catch (error) {
     // error is minify.SQLParsingError instance
     // error.message:
-    // Error parsing SQL at {line:1,col:7}: Unclosed text block.
+    // Error parsing SQL at {line:1,col:8}: Unclosed text block.
 }
 ```
 

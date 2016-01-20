@@ -93,7 +93,6 @@ describe("Minify/Positive", function () {
         });
     });
 
-
 });
 
 describe("Minify/Negative", function () {
@@ -112,6 +111,7 @@ describe("Minify/Negative", function () {
 
     describe("quotes in strings", function () {
         var errMsg = "Error parsing SQL at {line:1,col:1}: Unclosed text block.";
+
         it("must throw an error", function () {
             expect(function () {
                 minify("'");
@@ -138,8 +138,23 @@ describe("Minify/Negative", function () {
                 line: 1,
                 column: 1
             }));
-
         });
+
+        it("must report positions correctly", function () {
+            expect(getErrorPos("'").column).toBe(1);
+            expect(getErrorPos(" '").column).toBe(2);
+            expect(getErrorPos("s'").column).toBe(2);
+            expect(getErrorPos("s '").column).toBe(3);
+        });
+
+        function getErrorPos(sql) {
+            try {
+                minify(sql);
+            } catch (e) {
+                return e.position;
+            }
+            return null;
+        }
     });
 
     describe("unclosed multi-lines", function () {
@@ -188,6 +203,20 @@ describe("Index Position:", function () {
         });
     });
 
+    it("must work from the start", function () {
+        expect(pos("123456", 3)).toEqual({
+            line: 1,
+            column: 4
+        });
+    });
+
+    it("must work from the start", function () {
+        expect(pos("123456", 5)).toEqual({
+            line: 1,
+            column: 6
+        });
+    });
+
     it("step over lines correctly", function () {
         expect(pos("123\r\n456", 5)).toEqual({
             line: 2,
@@ -195,10 +224,10 @@ describe("Index Position:", function () {
         });
     });
 
-    it("must step back from a line break", function () {
+    it("must step over line breaks", function () {
         expect(pos("123\r\n", 3)).toEqual({
             line: 1,
-            column: 3
+            column: 4
         });
     });
 
