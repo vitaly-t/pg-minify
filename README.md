@@ -52,6 +52,7 @@ try {
     // error.message:
     // Error parsing SQL at {line:1,col:7}: Unclosed text block.
 }
+```
 
 ## License
 
