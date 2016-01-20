@@ -1,6 +1,6 @@
 {
   "name": "pg-minify",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Minifies PostgreSQL scripts.",
   "main": "lib/index.js",
   "scripts": {

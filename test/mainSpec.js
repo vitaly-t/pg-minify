@@ -5,6 +5,22 @@ var minify = require('../lib');
 var parser = require('../lib/parser');
 var errorLib = require('../lib/error');
 
+describe("Protocol", function () {
+
+    it("must have a function at the root", function () {
+        expect(minify instanceof Function).toBe(true);
+    });
+
+    it("must expose SQLParsingError type from the root", function () {
+        expect(minify.SQLParsingError instanceof Function).toBe(true);
+    });
+
+    it("must expose parsingErrorCode enum from the root", function () {
+        expect(minify.parsingErrorCode && typeof minify.parsingErrorCode === 'object').toBeTruthy();
+    });
+
+});
+
 describe("Minify/Positive", function () {
 
     describe("single-line comment", function () {
