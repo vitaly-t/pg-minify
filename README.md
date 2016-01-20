@@ -40,7 +40,7 @@ var sql = "SELECT 1; -- comments";
 minify(sql); //=> SELECT 1;
 ```
 
-##### Error Handling
+#### Error Handling
 
 [SQLParsingError] is thrown on failed SQL parsing.
 
