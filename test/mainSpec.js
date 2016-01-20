@@ -53,6 +53,16 @@ describe("Minify/Positive", function () {
         });
     });
 
+    describe("redundant gaps", function () {
+        it("must be all replaced with a single space", function () {
+            expect(minify("a  b")).toBe("a b");
+            expect(minify(" a     b ")).toBe("a b");
+            expect(minify("a\tb")).toBe("a b");
+            expect(minify("\ta\t\tb\t")).toBe("a b");
+            expect(minify("a - b")).toBe("a - b");
+        });
+    });
+
     describe("with multiple lines", function () {
         it("must be ignored", function () {
             expect(minify("--comment" + LB + LB + "text")).toBe("text");
@@ -63,18 +73,36 @@ describe("Minify/Positive", function () {
             expect(minify("start/*comment*/" + LB + " end")).toBe("start end");
             expect(minify("/*comment*/end " + LB)).toBe("end");
             expect(minify("/*start" + LB + "end*/" + LB + "text")).toBe("text");
+            expect(minify(" /*hello*/ " + LB + "next")).toBe("next");
         });
     });
+
 
 });
 
 describe("Minify/Negative", function () {
+
+    describe("passing non-text", function () {
+        var errMsg = "Input SQL must be a text string.";
+        it("must throw an error", function () {
+            expect(function () {
+                minify();
+            }).toThrow(new TypeError(errMsg));
+            expect(function () {
+                minify(123);
+            }).toThrow(new TypeError(errMsg));
+        });
+    });
 
     describe("quotes in strings", function () {
         var errMsg = "Error parsing SQL at {line:1,col:1}: Unclosed text block.";
         it("must throw an error", function () {
             expect(function () {
                 minify("'");
+            }).toThrow(errMsg);
+
+            expect(function () {
+                minify("''' ");
             }).toThrow(errMsg);
 
             expect(function () {

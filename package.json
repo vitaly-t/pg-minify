@@ -1,6 +1,6 @@
 {
   "name": "pg-minify",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Minifies PostgreSQL scripts.",
   "main": "lib/index.js",
   "scripts": {
@@ -22,7 +22,8 @@
     "email": "vitaly.tomilov@gmail.com"
   },
   "keywords": [
-    "minify SQL"
+    "minify SQL",
+    "uglify SQL"
   ],
   "author": {
     "name": "Vitaly Tomilov",
