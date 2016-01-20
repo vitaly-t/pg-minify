@@ -63,13 +63,19 @@ describe("Minify/Positive", function () {
     });
 
     describe("multi-line text", function () {
-        it("must be returned empty", function () {
+        it("must be returned with E", function () {
             expect(minify("'" + LB + "'")).toBe("E'\\n'");
             expect(minify("'" + LB + LB + "'")).toBe("E'\\n\\n'");
             expect(minify("text '" + LB + "'")).toBe("text E'\\n'");
             expect(minify("text e'" + LB + "'")).toBe("text e'\\n'");
             expect(minify("e'" + LB + "'")).toBe("e'\\n'");
             expect(minify("E'" + LB + "'")).toBe("E'\\n'");
+        });
+
+        it("must truncate text correctly", function () {
+            expect(minify("' first " + LB + " last '")).toBe("E' first\\nlast '");
+            expect(minify("' first " + LB + " second " + LB + " third '")).toBe("E' first\\nsecond\\nthird '");
+            expect(minify("'\t first " + LB + "\t second \t" + LB + "\t third \t'")).toBe("E'\t first\\nsecond\\nthird \t'");
         });
     });
 
