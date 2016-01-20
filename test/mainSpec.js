@@ -62,8 +62,21 @@ describe("Minify/Positive", function () {
         });
     });
 
+    describe("multi-line text", function () {
+        it("must be returned empty", function () {
+            expect(minify("'" + LB + "'")).toBe("E'\\n'");
+            expect(minify("'" + LB + LB + "'")).toBe("E'\\n\\n'");
+            expect(minify("text '" + LB + "'")).toBe("text E'\\n'");
+            expect(minify("text e'" + LB + "'")).toBe("text e'\\n'");
+            expect(minify("e'" + LB + "'")).toBe("e'\\n'");
+            expect(minify("E'" + LB + "'")).toBe("E'\\n'");
+        });
+    });
+
     describe("quotes in strings", function () {
         it("must be ignored", function () {
+            expect(minify("text''")).toBe("text''");
+            expect(minify("text ''")).toBe("text ''");
             expect(minify("''''")).toBe("''''");
             expect(minify("''''''")).toBe("''''''");
         });
