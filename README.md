@@ -21,6 +21,8 @@ $ npm install pg-minify
 
 ## Testing
 
+First, clone the repository and install DEV dependencies.
+
 ```
 $ npm test
 ```

@@ -4,22 +4,7 @@ var LB = require('os').EOL;
 var minify = require('../lib');
 var parser = require('../lib/parser');
 var errorLib = require('../lib/error');
-
-describe("Protocol", function () {
-
-    it("must have a function at the root", function () {
-        expect(minify instanceof Function).toBe(true);
-    });
-
-    it("must expose SQLParsingError type from the root", function () {
-        expect(minify.SQLParsingError instanceof Function).toBe(true);
-    });
-
-    it("must expose parsingErrorCode enum from the root", function () {
-        expect(minify.parsingErrorCode && typeof minify.parsingErrorCode === 'object').toBeTruthy();
-    });
-
-});
+var PEC = errorLib.parsingErrorCode;
 
 describe("Minify/Positive", function () {
 
@@ -116,6 +101,14 @@ describe("Minify/Positive", function () {
 
 describe("Minify/Negative", function () {
 
+    function errorCode(sql) {
+        try {
+            minify(sql);
+        } catch (e) {
+            return e.code;
+        }
+    }
+
     describe("passing non-text", function () {
         var errMsg = "Input SQL must be a text string.";
         it("must throw an error", function () {
@@ -129,34 +122,11 @@ describe("Minify/Negative", function () {
     });
 
     describe("quotes in strings", function () {
-        var errMsg = "Error parsing SQL at {line:1,col:1}: Unclosed text block.";
 
-        it("must throw an error", function () {
-            expect(function () {
-                minify("'");
-            }).toThrow(errMsg);
-
-            expect(function () {
-                minify("''' ");
-            }).toThrow(errMsg);
-
-            expect(function () {
-                minify("'''");
-            }).toThrow(errMsg);
-
-            expect(function () {
-                minify("'''");
-            }).toThrow(new errorLib.SQLParsingError(errorLib.parsingErrorCode.unclosedText, "Unclosed text block.", {
-                line: 1,
-                column: 1
-            }));
-
-            expect(function () {
-                minify("/*");
-            }).toThrow(new errorLib.SQLParsingError(errorLib.parsingErrorCode.unclosedMLC, "Unclosed multi-line comment.", {
-                line: 1,
-                column: 1
-            }));
+        it("must report an error", function () {
+            expect(errorCode("'")).toBe(PEC.unclosedText);
+            expect(errorCode("'''")).toBe(PEC.unclosedText);
+            expect(errorCode("''' ")).toBe(PEC.unclosedText);
         });
 
         it("must report positions correctly", function () {
@@ -177,76 +147,9 @@ describe("Minify/Negative", function () {
     });
 
     describe("unclosed multi-lines", function () {
-        var errMsg = "Error parsing SQL at {line:1,col:1}: Unclosed multi-line comment.";
-        it("must throw an error", function () {
-            expect(function () {
-                minify("/*");
-            }).toThrow(errMsg);
-
-            expect(function () {
-                minify("/*text");
-            }).toThrow(errMsg);
-        });
-    });
-
-});
-
-describe("EOL", function () {
-
-    it("must detect empty text correctly", function () {
-        expect(parser.getEOL("")).toBe(LB);
-        expect(parser.getEOL(" ")).toBe(LB);
-    });
-
-    it("must detect Unix correctly", function () {
-        expect(parser.getEOL("\n")).toBe("\n");
-        expect(parser.getEOL("\r\n\n\n")).toBe("\n");
-    });
-
-    it("must detect Windows correctly", function () {
-        expect(parser.getEOL("\r\n")).toBe("\r\n");
-        expect(parser.getEOL("\r\n\n\r\n")).toBe("\r\n");
-    });
-});
-
-describe("Index Position:", function () {
-
-    function pos(text, idx) {
-        return parser.getIndexPos(text, idx, "\r\n");
-    }
-
-    it("must work from the start", function () {
-        expect(pos("123\r\n456", 0)).toEqual({
-            line: 1,
-            column: 1
-        });
-    });
-
-    it("must work from the start", function () {
-        expect(pos("123456", 3)).toEqual({
-            line: 1,
-            column: 4
-        });
-    });
-
-    it("must work from the start", function () {
-        expect(pos("123456", 5)).toEqual({
-            line: 1,
-            column: 6
-        });
-    });
-
-    it("step over lines correctly", function () {
-        expect(pos("123\r\n456", 5)).toEqual({
-            line: 2,
-            column: 1
-        });
-    });
-
-    it("must step over line breaks", function () {
-        expect(pos("123\r\n", 3)).toEqual({
-            line: 1,
-            column: 4
+        it("must report an error", function () {
+            expect(errorCode("/*")).toBe(PEC.unclosedMLC);
+            expect(errorCode("/*text")).toBe(PEC.unclosedMLC);
         });
     });
 
