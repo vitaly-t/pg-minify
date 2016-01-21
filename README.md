@@ -61,4 +61,4 @@ try {
 Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
-[SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L10
+[SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js
