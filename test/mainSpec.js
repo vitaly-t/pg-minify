@@ -60,7 +60,16 @@ describe("Minify/Positive", function () {
         it("must truncate text correctly", function () {
             expect(minify("' first " + LB + " last '")).toBe("E' first\\nlast '");
             expect(minify("' first " + LB + " second " + LB + " third '")).toBe("E' first\\nsecond\\nthird '");
-            expect(minify("'\t first " + LB + "\t second \t" + LB + "\t third \t'")).toBe("E'\t first\\nsecond\\nthird \t'");
+        });
+    });
+
+    describe("tabs in text", function () {
+        it("must be replaced", function () {
+            expect(minify("\t")).toBe("");
+            expect(minify("'\t'")).toBe("E'\\t'");
+            expect(minify("'\\t'")).toBe("'\\t'");
+            expect(minify("e' \t '")).toBe("e' \\t '");
+            expect(minify("'\t first " + LB + "\t second \t" + LB + "\t third \t'")).toBe("E'\\t first\\nsecond\\nthird \\t'");
         });
     });
 
