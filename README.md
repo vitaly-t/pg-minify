@@ -4,7 +4,7 @@ pg-minify
 [![Build Status](https://travis-ci.org/vitaly-t/pg-minify.svg?branch=master)](https://travis-ci.org/vitaly-t/pg-minify)
 [![Coverage Status](https://coveralls.io/repos/vitaly-t/pg-minify/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/pg-minify?branch=master)
 
-Minifies a PostgreSQL script into a single-line SQL command: 
+Minifies a PostgreSQL script into a single-line SQL: 
 
 1. Removes both `/*multi-line*/` and `--single-line` comments
 2. Concatenates multi-line strings into single-line with `\n`
@@ -61,4 +61,4 @@ try {
 Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
-[SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js
+[SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#12
