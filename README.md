@@ -56,6 +56,20 @@ try {
 }
 ```
 
+## API
+
+### minify(sql, [options]) ⇒ String
+
+Minifies SQL into a single line, according to the `options`.
+
+##### options.compress ⇒ Boolean
+
+Compresses the SQL to the bare minimum that PostgreSQL can understand, by removing
+every single space that's not required to process the script correctly.
+
+* `false (default)` - keep minimum spaces, for easier read
+* `true` - remove all unnecessary spaces 
+
 ## License
 
 Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
