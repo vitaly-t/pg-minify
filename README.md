@@ -65,7 +65,7 @@ Minifies SQL into a single line, according to the `options`.
 ##### options.compress ⇒ Boolean
 
 Compresses the SQL to its bare minimum that PostgreSQL can understand,
-by removing every single space that is not necessary.
+by removing all unnecessary spaces.
 
 * `false (default)` - keep minimum spaces, for easier read
 * `true` - remove all unnecessary spaces 

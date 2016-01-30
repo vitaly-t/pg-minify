@@ -130,6 +130,14 @@ describe("Minify/Negative", function () {
         });
     });
 
+    describe("passing invalid 'options'", function () {
+        it("must throw an error", function () {
+            expect(function () {
+                minify('', 123);
+            }).toThrow(new TypeError("Parameter 'options' must be an object."));
+        });
+    });
+
     describe("quotes in strings", function () {
 
         it("must report an error", function () {
