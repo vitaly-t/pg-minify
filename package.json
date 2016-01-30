@@ -22,7 +22,8 @@
   },
   "keywords": [
     "minify SQL",
-    "uglify SQL"
+    "uglify SQL",
+    "compress SQL"
   ],
   "author": {
     "name": "Vitaly Tomilov",
