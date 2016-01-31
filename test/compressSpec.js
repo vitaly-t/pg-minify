@@ -11,7 +11,7 @@ describe("Compress", function () {
 
     describe("with compressors", function () {
         it("must remove all gaps", function () {
-            expect(minify(" . , ; : ( ) [ ] = < > + - * / | ! ")).toBe(".,;:()[]=<>+-*/|!");
+            expect(minify(" . , ; : ( ) [ ] = < > + - * / | ! ? @ # ")).toBe(".,;:()[]=<>+-*/|!?@#");
         });
     });
 
