@@ -7,9 +7,10 @@ pg-minify
 Minifies a PostgreSQL script into a single line: 
 
 1. Removes both `/*multi-line*/` and `--single-line` comments
-2. Concatenates multi-line strings into single-line with `\n`
+2. Concatenates multi-line strings into a single line with `\n`
 3. Removes redundant line gaps: line breaks, tabs and spaces
 4. Flattens the resulting script into a single line
+
 
 It also provides basic parsing and error reporting for invalid SQL.
 
