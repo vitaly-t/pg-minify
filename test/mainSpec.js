@@ -61,6 +61,15 @@ describe("Minify/Positive", function () {
             expect(minify("' first " + LB + " last '")).toBe("E' first\\nlast '");
             expect(minify("' first " + LB + " second " + LB + " third '")).toBe("E' first\\nsecond\\nthird '");
         });
+
+        it("must add a space where necessary", function () {
+            expect(minify("select'\nvalue'")).toBe("select E'\\nvalue'");
+        })
+
+        it("must not add a space to an empty string", function () {
+            expect(minify("'\nvalue'")).toBe("E'\\nvalue'");
+        });
+
     });
 
     describe("tabs in text", function () {

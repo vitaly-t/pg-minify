@@ -3,6 +3,8 @@
 var LB = require('os').EOL;
 var lib = require('../lib');
 
+var compressors = '.,;:()[]=<>+-*/|!?@#';
+
 function minify(sql) {
     return lib(sql, {compress: true});
 }
@@ -11,7 +13,7 @@ describe("Compress", function () {
 
     describe("with compressors", function () {
         it("must remove all gaps", function () {
-            expect(minify(" . , ; : ( ) [ ] = < > + - * / | ! ? @ # ")).toBe(".,;:()[]=<>+-*/|!?@#");
+            expect(minify(' ' + compressors.split('').join(' ') + ' ')).toBe(compressors);
         });
     });
 
@@ -46,7 +48,15 @@ describe("Compress", function () {
     describe("for multi-line text", function () {
         it("must preserve the prefix space", function () {
             expect(minify("select '\nvalue'", {compress: true})).toBe("select E'\\nvalue'");
+        });
+        it("must not add a space to an empty string", function () {
             expect(minify("'\nvalue'", {compress: true})).toBe("E'\\nvalue'");
+        });
+        it("must not add a space after special symbols", function () {
+            for (var i = 0; i < compressors.length; i++) {
+                var c = compressors[i];
+                expect(minify(c + "'\nvalue'", {compress: true})).toBe(c + "E'\\nvalue'");
+            }
         });
     });
 
