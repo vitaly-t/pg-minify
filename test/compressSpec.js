@@ -43,4 +43,11 @@ describe("Compress", function () {
         });
     });
 
+    describe("for multi-line text", function () {
+        it("must preserve the prefix space", function () {
+            expect(minify("select '\nvalue'", {compress: true})).toBe("select E'\\nvalue'");
+            expect(minify("'\nvalue'", {compress: true})).toBe("E'\\nvalue'");
+        });
+    });
+
 });
