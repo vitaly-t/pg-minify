@@ -188,6 +188,7 @@ describe("Minify/Negative", function () {
                 error = e;
             }
             expect(error.toString()).toBe(error.inspect());
+            expect(error.toString(1) != error.inspect()).toBe(true);
         });
     })
 });
