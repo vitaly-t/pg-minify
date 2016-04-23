@@ -179,4 +179,15 @@ describe("Minify/Negative", function () {
         });
     });
 
+    describe("toString + inspect", function () {
+        it("must produce the same output", function () {
+            var error;
+            try {
+                minify("'test");
+            } catch (e) {
+                error = e;
+            }
+            expect(error.toString()).toBe(error.inspect());
+        });
+    })
 });
