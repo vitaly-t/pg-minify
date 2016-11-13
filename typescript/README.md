@@ -9,7 +9,7 @@ You can use it either directly or via [typings].
 * directly:
 
 ```ts
-/// <reference path='../node_modules/pg-minify/typescript' />
+/// <reference path='../node_modules/pg-minify/typescript/index.d.ts' />
 ```
 
 * via [typings]:

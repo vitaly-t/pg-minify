@@ -4,12 +4,16 @@
 
 declare module 'pg-minify' {
 
-    interface IErrorPosition {
-        line:number,
-        column:number
-    }
-
     namespace pgMinify {
+
+        export type minifyOptions = {
+            compress?: boolean;
+        };
+
+        export interface IErrorPosition {
+            line: number,
+            column: number
+        }
 
         export enum parsingErrorCode {
             unclosedMLC = 1,    // Unclosed multi-line comment.
@@ -19,17 +23,17 @@ declare module 'pg-minify' {
         }
 
         export class SQLParsingError implements Error {
-            name:string;
-            message:string;
-            stack:string;
-            error:string;
-            code:parsingErrorCode;
-            position:IErrorPosition;
+            name: string;
+            message: string;
+            stack: string;
+            error: string;
+            code: parsingErrorCode;
+            position: IErrorPosition;
         }
 
     }
 
-    function pgMinify(sql:string, options?:{compress?:boolean}):string;
+    function pgMinify(sql: string, options?: pgMinify.minifyOptions): string;
 
     export = pgMinify;
 }

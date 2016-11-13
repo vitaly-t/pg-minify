@@ -3,8 +3,5 @@
   "global": true,
   "files": [
     "typescript/index.d.ts"
-  ],
-  "globalDependencies": {
-    "node": "registry:env/node#4.0.0+20160622202520"
-  }
+  ]
 }
