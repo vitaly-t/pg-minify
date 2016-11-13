@@ -5,15 +5,15 @@ pg-minify
 [![Coverage Status](https://coveralls.io/repos/vitaly-t/pg-minify/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/pg-minify?branch=master)
 [![Join the chat at https://gitter.im/vitaly-t/pg-minify](https://badges.gitter.im/vitaly-t/pg-minify.svg)](https://gitter.im/vitaly-t/pg-minify?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Minifies a PostgreSQL script into a single line: 
+Features: 
 
-1. Removes both `/*multi-line*/` and `--single-line` comments
-2. Concatenates multi-line strings into a single line with `\n`
-3. Removes redundant line gaps: line breaks, tabs and spaces
-4. Flattens the resulting script into a single line
-5. Optionally, compresses SQL for minimum space 
-
-It also provides basic parsing and error reporting for invalid SQL.
+* Removes both `/*multi-line*/` and `--single-line` comments
+* Concatenates multi-line strings into a single line with `\n`
+* Fixes multi-line text, prefixing it with `E` where needed
+* Removes redundant line gaps: line breaks, tabs and spaces
+* Provides basic parsing and error reporting for invalid SQL
+* Flattens the resulting script into a single line
+* Optionally, compresses SQL for minimum space 
 
 ## Installing
 
@@ -44,7 +44,7 @@ var sql = "SELECT 1; -- comments";
 minify(sql); //=> SELECT 1;
 ```
 
-With compression:
+with compression:
 
 ```js
 var sql = "SELECT * FROM table WHERE col = 123; -- comments";
