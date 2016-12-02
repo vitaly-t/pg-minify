@@ -1,6 +1,4 @@
-/// <reference path='../../typescript/index.d.ts' />
-
-import * as minify from 'pg-minify';
+import * as minify from '../../typescript/pg-minify';
 
 var s1 = minify('select * from table; --comment');
 var s2 = minify('select * from table; --comment', {});

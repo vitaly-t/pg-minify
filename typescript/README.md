@@ -1,28 +1,19 @@
 ## TypeScript for pg-minify
 
-Complete TypeScript declarations for [pg-minify].
+Complete TypeScript 2.0 declarations for the [pg-minify] module.
 
 ### Inclusion
 
-You can use it either directly or via [typings].
- 
-* directly:
+Typescript should be able to pick up the definitions without any manual configuration.
+
+### Usage
 
 ```ts
-/// <reference path='../node_modules/pg-minify/typescript/index.d.ts' />
-```
+import * as minify from "pg-minify";
 
-* via [typings]:
+var sql = "SELECT 1; -- comments";
 
-```
-$ typings install --save --global github:vitaly-t/pg-minify
-```
-
-then you can also use a generic reference:
-
-```ts
-/// <reference path='../typings/index' />
+minify(sql); //=> SELECT 1;
 ```
 
 [pg-minify]:https://github.com/vitaly-t/pg-minify
-[typings]:https://github.com/typings/typings
