@@ -45,7 +45,7 @@ var sql = "SELECT 1; -- comments";
 minify(sql); //=> SELECT 1;
 ```
 
-with compression:
+with compression (remove all unnecessary spaces):
 
 ```js
 var sql = "SELECT * FROM table WHERE col = 123; -- comments";
