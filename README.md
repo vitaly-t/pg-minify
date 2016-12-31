@@ -46,13 +46,13 @@ var sql = "SELECT 1; -- comments";
 minify(sql); //=> SELECT 1;
 ```
 
-with compression (remove all unnecessary spaces):
+with compression (removes all unnecessary spaces):
 
 ```js
-var sql = "SELECT * FROM table WHERE col = 123; -- comments";
+var sql = 'SELECT * FROM "table" WHERE col = 123; -- comments';
 
 minify(sql, {compress: true});
-//=> SELECT*FROM table WHERE col=123;
+//=> SELECT*FROM"table"WHERE col=123;
 ```
 
 #### Error Handling
@@ -87,4 +87,4 @@ Compresses / uglifies the SQL to its bare minimum, by removing all unnecessary s
 Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
-[SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L12
+[SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L21
