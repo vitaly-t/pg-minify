@@ -23,19 +23,6 @@ Features:
 $ npm install pg-minify
 ```
 
-## Testing
-
-First, clone the repository and install DEV dependencies.
-
-```
-$ npm test
-```
-
-Testing with coverage:
-```
-$ npm run coverage
-```
-
 ## Usage
 
 ```js
@@ -55,7 +42,9 @@ minify(sql, {compress: true});
 //=> SELECT*FROM"table"WHERE col=123;
 ```
 
-#### Error Handling
+The library's distribution includes [TypeScript] declarations.
+
+## Error Handling
 
 [SQLParsingError] is thrown on failed SQL parsing:
 
@@ -82,9 +71,23 @@ Compresses / uglifies the SQL to its bare minimum, by removing all unnecessary s
 * `false (default)` - keep minimum spaces, for easier read
 * `true` - remove all unnecessary spaces 
 
+## Testing
+
+First, clone the repository and install DEV dependencies.
+
+```
+$ npm test
+```
+
+Testing with coverage:
+```
+$ npm run coverage
+```
+
 ## License
 
-Copyright © 2016 [Vitaly Tomilov](https://github.com/vitaly-t);
+Copyright © 2017 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
 [SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L21
+[TypeScript]:https://github.com/vitaly-t/pg-minify/tree/master/typescript
