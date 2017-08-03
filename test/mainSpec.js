@@ -154,7 +154,7 @@ describe('Minify/Negative', function () {
 
     describe('nested multi-line comments', function () {
         it('must ignore closures in text', function () {
-            // TODO: Consider adding some diagnostics here:
+            // TODO: Consider adding a new error type here:
             expect(errorCode('/*\'*/\'*/')).toBe(PEC.unclosedText);
         });
     });
