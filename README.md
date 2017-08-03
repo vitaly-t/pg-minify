@@ -1,5 +1,6 @@
 pg-minify
 =========
+
 Minifies PostgreSQL scripts.
 
 [![Build Status](https://travis-ci.org/vitaly-t/pg-minify.svg?branch=master)](https://travis-ci.org/vitaly-t/pg-minify)
@@ -7,7 +8,7 @@ Minifies PostgreSQL scripts.
 [![Downloads Count](http://img.shields.io/npm/dm/pg-minify.svg)](https://www.npmjs.com/package/pg-minify)
 [![Join the chat at https://gitter.im/vitaly-t/pg-minify](https://badges.gitter.im/vitaly-t/pg-minify.svg)](https://gitter.im/vitaly-t/pg-minify?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Features: 
+**Features:** 
 
 * Removes both `/*multi-line*/` and `--single-line` comments
 * Concatenates multi-line strings into a single line with `\n`
@@ -16,6 +17,14 @@ Features:
 * Provides basic parsing and error reporting for invalid SQL
 * Flattens the resulting script into a single line
 * Optionally, compresses SQL for minimum space 
+
+Although this library was written primarily for PostgreSQL, it can correctly process
+most of the known SQL notations, including MS-SQL and MySQL.
+
+**Limitations:**
+
+* Multi-line quoted identifiers are not supported, throwing an error when encountered.
+* Nested multi-line comments are not supported - `/* /* nested */ */`.
 
 ## Installing
 

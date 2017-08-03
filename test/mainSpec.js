@@ -114,6 +114,18 @@ describe('Minify/Positive', function () {
         });
     });
 
+    describe('multi-line comment in text', function () {
+        it('must ignore closures in text', function () {
+            // expect(minify('/*\'*/\'*/')).toBe('\'*/\''); // TODO: Bug!!!
+        });
+    });
+
+    describe('nested multi-line comments', function () {
+        // TODO: Consider implementing it later on.
+        it('are not supported', function () {
+            expect(minify('/*/*text*/*/')).toBe('*/');
+        });
+    });
 });
 
 describe('Minify/Negative', function () {

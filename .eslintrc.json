@@ -16,6 +16,13 @@
     "new-cap": "error",
     "no-console": "error",
     "comma-dangle": "error",
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "quotes": [
       "error",
       "single"
