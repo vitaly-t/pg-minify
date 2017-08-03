@@ -1,11 +1,30 @@
 'use strict';
 
-var parser = require('../lib/parser');
+var LB = require('os').EOL;
+var utils = require('../lib/utils');
 
-describe('Index Position', function () {
+describe('getEOL', function () {
+
+    it('must detect empty text correctly', function () {
+        expect(utils.getEOL('')).toBe(LB);
+        expect(utils.getEOL(' ')).toBe(LB);
+    });
+
+    it('must detect Unix correctly', function () {
+        expect(utils.getEOL('\n')).toBe('\n');
+        expect(utils.getEOL('\r\n\n\n')).toBe('\n');
+    });
+
+    it('must detect Windows correctly', function () {
+        expect(utils.getEOL('\r\n')).toBe('\r\n');
+        expect(utils.getEOL('\r\n\n\r\n')).toBe('\r\n');
+    });
+});
+
+describe('getIndexPos', function () {
 
     function pos(text, idx) {
-        return parser.getIndexPos(text, idx, '\r\n');
+        return utils.getIndexPos(text, idx, '\r\n');
     }
 
     it('must work from the start', function () {

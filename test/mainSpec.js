@@ -114,16 +114,10 @@ describe('Minify/Positive', function () {
         });
     });
 
-    describe('multi-line comment in text', function () {
-        it('must ignore closures in text', function () {
-            // expect(minify('/*\'*/\'*/')).toBe('\'*/\''); // TODO: Bug!!!
-        });
-    });
-
     describe('nested multi-line comments', function () {
         // TODO: Consider implementing it later on.
         it('are not supported', function () {
-            expect(minify('/*/*text*/*/')).toBe('*/');
+            expect(minify('/*/*text*/*/')).toBe('*/'); // because nested ones are not supported
         });
     });
 });
@@ -155,6 +149,13 @@ describe('Minify/Negative', function () {
             expect(function () {
                 minify('', 123);
             }).toThrow(new TypeError('Parameter \'options\' must be an object.'));
+        });
+    });
+
+    describe('nested multi-line comments', function () {
+        it('must ignore closures in text', function () {
+            // TODO: Consider adding some diagnostics here:
+            expect(errorCode('/*\'*/\'*/')).toBe(PEC.unclosedText);
         });
     });
 
