@@ -18,8 +18,7 @@ Minifies PostgreSQL scripts.
 * Flattens the resulting script into a single line
 * Optionally, compresses SQL for minimum space 
 
-Although this library was written primarily for PostgreSQL, it can correctly process
-most of the known SQL notations, including MS-SQL and MySQL.
+This library is primarily for PostgreSQL, but it can correctly process MS-SQL and MySQL scripts.
 
 **Limitations:**
 
