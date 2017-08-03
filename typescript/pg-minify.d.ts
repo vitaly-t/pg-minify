@@ -3,6 +3,7 @@
 ////////////////////////////////////////
 
 declare namespace pgMinify {
+
     type minifyOptions = {
         compress?: boolean;
     };
@@ -13,10 +14,10 @@ declare namespace pgMinify {
     }
 
     enum parsingErrorCode {
-        unclosedMLC = 1,    // Unclosed multi-line comment.
-        unclosedText = 2,   // Unclosed text block.
-        unclosedQI = 3,     // Unclosed quoted identifier.
-        multiLineQI = 4     // Multi-line quoted identifiers are not supported.
+        unclosedMLC = 0,    // Unclosed multi-line comment.
+        unclosedText = 1,   // Unclosed text block.
+        unclosedQI = 2,     // Unclosed quoted identifier.
+        multiLineQI = 3     // Multi-line quoted identifiers are not supported.
     }
 
     class SQLParsingError implements Error {
