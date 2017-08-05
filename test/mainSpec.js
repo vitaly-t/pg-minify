@@ -79,6 +79,17 @@ describe('Minify/Positive', function () {
 
     });
 
+    describe('Special Comment', function () {
+
+        describe('without compression', function () {
+            expect(minify('/*!text*/')).toBe('/*!text*/');
+        });
+
+        describe('with compression', function () {
+            expect(minify('prefix /*!text*/ suffix', {compress: true})).toBe('prefix/*!text*/suffix');
+        });
+    });
+
     describe('tabs in text', function () {
         it('must be replaced', function () {
             expect(minify('\t')).toBe('');
