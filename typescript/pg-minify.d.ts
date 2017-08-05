@@ -1,5 +1,5 @@
 ////////////////////////////////////////
-// Requires pg-minify v0.4.0 or later.
+// Requires pg-minify v0.5.0 or later.
 ////////////////////////////////////////
 
 declare namespace pgMinify {
@@ -17,7 +17,8 @@ declare namespace pgMinify {
         unclosedMLC = 0,    // Unclosed multi-line comment.
         unclosedText = 1,   // Unclosed text block.
         unclosedQI = 2,     // Unclosed quoted identifier.
-        multiLineQI = 3     // Multi-line quoted identifiers are not supported.
+        multiLineQI = 3,    // Multi-line quoted identifiers are not supported.
+        nestedMLC = 4       // Nested multi-line comments are not supported.
     }
 
     class SQLParsingError implements Error {

@@ -18,6 +18,7 @@ describe('Protocol', function () {
         expect(minify.parsingErrorCode.unclosedText).toBe(1);
         expect(minify.parsingErrorCode.unclosedQI).toBe(2);
         expect(minify.parsingErrorCode.multiLineQI).toBe(3);
+        expect(minify.parsingErrorCode.nestedMLC).toBe(4);
     });
 
 });

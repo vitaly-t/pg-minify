@@ -35,7 +35,15 @@ describe('Minify/Positive', function () {
     describe('comments in strings', function () {
         it('must be skipped', function () {
             expect(minify('\'--comment\'')).toBe('\'--comment\'');
+            expect(minify('\'--comment' + LB + 'text\'')).toBe('E\'--comment\\ntext\'');
             expect(minify('\'/*comment*/\'')).toBe('\'/*comment*/\'');
+        });
+    });
+
+    describe('comments in identifiers', function () {
+        it('must be skipped', function () {
+            expect(minify('"--comment"')).toBe('"--comment"');
+            expect(minify('"/*comment*/"')).toBe('"/*comment*/"');
         });
     });
 
@@ -114,12 +122,6 @@ describe('Minify/Positive', function () {
         });
     });
 
-    describe('nested multi-line comments', function () {
-        // TODO: Consider implementing it later on.
-        it('are not supported', function () {
-            expect(minify('/*/*text*/*/')).toBe('*/'); // because nested ones are not supported
-        });
-    });
 });
 
 describe('Minify/Negative', function () {
@@ -130,6 +132,15 @@ describe('Minify/Negative', function () {
         } catch (e) {
             return e.code;
         }
+    }
+
+    function getErrorPos(sql) {
+        try {
+            minify(sql);
+        } catch (e) {
+            return e.position;
+        }
+        return null;
     }
 
     describe('passing non-text', function () {
@@ -153,9 +164,17 @@ describe('Minify/Negative', function () {
     });
 
     describe('nested multi-line comments', function () {
+        /* Nested comments cannot be implemented without full tokenization,
+        * because comments can be inside strings and identifiers, which can be
+        * part of SQL as well as regular text, and there is no way of telling
+        * which one it is. */
+        it('must report correct error position', function () {
+            expect(getErrorPos('/*/*text*/*/').column).toBe(3);
+            expect(getErrorPos('/*text*/*/').column).toBe(7);
+            expect(getErrorPos('hello/*world!/**/').column).toBe(14);
+        });
         it('must ignore closures in text', function () {
-            // TODO: Consider adding a new error type here:
-            expect(errorCode('/*\'*/\'*/')).toBe(PEC.unclosedText);
+            expect(errorCode('/*\'*/\'*/')).toBe(PEC.nestedMLC);
         });
     });
 
@@ -174,14 +193,6 @@ describe('Minify/Negative', function () {
             expect(getErrorPos('s \'').column).toBe(3);
         });
 
-        function getErrorPos(sql) {
-            try {
-                minify(sql);
-            } catch (e) {
-                return e.position;
-            }
-            return null;
-        }
     });
 
     describe('unclosed multi-lines', function () {

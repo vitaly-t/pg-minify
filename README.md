@@ -8,7 +8,7 @@ Minifies PostgreSQL scripts.
 [![Downloads Count](http://img.shields.io/npm/dm/pg-minify.svg)](https://www.npmjs.com/package/pg-minify)
 [![Join the chat at https://gitter.im/vitaly-t/pg-minify](https://badges.gitter.im/vitaly-t/pg-minify.svg)](https://gitter.im/vitaly-t/pg-minify?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-**Features:** 
+**Features:**
 
 * Removes both `/*multi-line*/` and `--single-line` comments
 * Concatenates multi-line strings into a single line with `\n`
@@ -23,7 +23,7 @@ This library is originally for PostgreSQL, though it works for MS-SQL and MySQL 
 **Limitations:**
 
 * Multi-line quoted identifiers are not supported, throwing an error when encountered.
-* Nested multi-line comments are not supported - `/* /* nested */ */`.
+* Nested multi-line comments are not supported, throwing an error when encountered.
 
 ## Installing
 
@@ -36,7 +36,7 @@ $ npm install pg-minify
 ```js
 var minify = require('pg-minify');
 
-var sql = "SELECT 1; -- comments";
+var sql = 'SELECT 1; -- comments';
 
 minify(sql); //=> SELECT 1;
 ```
@@ -58,7 +58,7 @@ The library's distribution includes [TypeScript] declarations.
 
 ```js
 try {
-    minify("SELECT '1");
+    minify('SELECT \'1');
 } catch (error) {
     // error is minify.SQLParsingError instance
     // error.message:
