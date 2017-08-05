@@ -169,12 +169,13 @@ describe('Minify/Negative', function () {
         * part of SQL as well as regular text, and there is no way of telling
         * which one it is. */
         it('must report correct error position', function () {
+            expect(minify('/*text*/*/')).toBe('*/');
             expect(getErrorPos('/*/*text*/*/').column).toBe(3);
-            expect(getErrorPos('/*text*/*/').column).toBe(7);
+            expect(getErrorPos('/*text/**/').column).toBe(7);
             expect(getErrorPos('hello/*world!/**/').column).toBe(14);
         });
         it('must ignore closures in text', function () {
-            expect(errorCode('/*\'*/\'*/')).toBe(PEC.nestedMLC);
+            expect(errorCode('/*\'*/\'*/')).toBe(PEC.unclosedText);
         });
     });
 
