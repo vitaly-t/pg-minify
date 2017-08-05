@@ -98,5 +98,5 @@ $ npm run coverage
 Copyright © 2017 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
-[SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L21
+[SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L24
 [TypeScript]:https://github.com/vitaly-t/pg-minify/tree/master/typescript
