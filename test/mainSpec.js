@@ -15,6 +15,15 @@ describe('Minify/Positive', function () {
         });
     });
 
+    describe('multi-line comment', function () {
+        describe('must leave a space', function () {
+            it('where merging is not possible', function () {
+                // TODO: consider implementing
+                // expect(minify('select/*comment*/123')).toBe('select 123');
+            });
+        });
+    });
+
     describe('single-line comment with a prefix', function () {
         it('must return the prefix', function () {
             expect(minify('text--comment')).toBe('text');
