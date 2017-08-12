@@ -31,6 +31,9 @@ describe('Compress', function () {
             expect(minify(' /*comment*/ ' + LB + ' suffix ')).toBe('suffix');
             expect(minify(' prefix- /*comment */ ' + LB + ' suffix ')).toBe('prefix-suffix');
         });
+        it('must preserve the minimum gaps', function () {
+            expect(minify('select /*comment */1')).toBe('select 1');
+        });
     });
 
     describe('with a text block', function () {
