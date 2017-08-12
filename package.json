@@ -1,6 +1,6 @@
 {
   "name": "pg-minify",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Minifies PostgreSQL scripts.",
   "main": "lib/index.js",
   "typings": "typescript/pg-minify.d.ts",
@@ -24,9 +24,14 @@
     "email": "vitaly.tomilov@gmail.com"
   },
   "keywords": [
-    "minify SQL",
-    "uglify SQL",
-    "compress SQL"
+    "sql",
+    "postgresql",
+    "comments",
+    "minify",
+    "uglify",
+    "compress",
+    "strip",
+    "remove"
   ],
   "author": {
     "name": "Vitaly Tomilov",
@@ -38,10 +43,10 @@
     "npm": ">=1.4"
   },
   "devDependencies": {
-    "eslint": "4.4",
-    "coveralls": "2.11",
-    "istanbul": "0.4",
-    "jasmine-node": "1.x",
-    "typescript": "2.x"
+    "coveralls": "~2.11.16",
+    "eslint": "~4.4.1",
+    "istanbul": "~0.4.5",
+    "jasmine-node": "~1.14.5",
+    "typescript": "~2.4.2"
   }
 }
