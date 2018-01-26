@@ -43,10 +43,10 @@
     "npm": ">=1.4"
   },
   "devDependencies": {
-    "coveralls": "~2.11.16",
-    "eslint": "~4.4.1",
+    "coveralls": "~3.0.0",
+    "eslint": "~4.16.0",
     "istanbul": "~0.4.5",
     "jasmine-node": "~1.14.5",
-    "typescript": "~2.4.2"
+    "typescript": "~2.6.2"
   }
 }
