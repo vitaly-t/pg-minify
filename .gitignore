@@ -3,3 +3,5 @@ node_modules/
 coverage/
 test/typescript/*.js
 *.map
+*.log
+package-lock.json

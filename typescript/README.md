@@ -1,6 +1,6 @@
 ## TypeScript for pg-minify
 
-Complete TypeScript 2.x declarations for the [pg-minify] module.
+Complete TypeScript 2.x/3.x declarations for the [pg-minify] module.
 
 ### Inclusion
 

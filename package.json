@@ -1,6 +1,6 @@
 {
   "name": "pg-minify",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Minifies PostgreSQL scripts.",
   "main": "lib/index.js",
   "typings": "typescript/pg-minify.d.ts",
@@ -39,14 +39,14 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=0.10",
+    "node": ">=0.12",
     "npm": ">=1.4"
   },
   "devDependencies": {
-    "coveralls": "~3.0.0",
-    "eslint": "~4.16.0",
-    "istanbul": "~0.4.5",
-    "jasmine-node": "~1.14.5",
-    "typescript": "~2.6.2"
+    "coveralls": "3.0.2",
+    "eslint": "5.7.0",
+    "istanbul": "0.4.5",
+    "jasmine-node": "1.16.2",
+    "typescript": "3.1.3"
   }
 }

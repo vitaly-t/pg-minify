@@ -1,5 +1,5 @@
 ////////////////////////////////////////
-// Requires pg-minify v0.5.0 or later.
+// Requires pg-minify v0.5.5 or later.
 ////////////////////////////////////////
 
 declare namespace pgMinify {
