@@ -11,7 +11,7 @@ Typescript should be able to pick up the definitions without any manual configur
 ```ts
 import * as minify from 'pg-minify';
 
-var sql = 'SELECT 1; -- comments';
+const sql = 'SELECT 1; -- comments';
 
 minify(sql); //=> SELECT 1;
 ```

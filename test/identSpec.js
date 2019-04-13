@@ -1,19 +1,19 @@
 'use strict';
 
-var LB = require('os').EOL;
-var minify = require('../lib');
-var errorLib = require('../lib/error');
-var PEC = errorLib.parsingErrorCode;
+const LB = require('os').EOL;
+const minify = require('../lib');
+const errorLib = require('../lib/error');
+const PEC = errorLib.parsingErrorCode;
 
-describe('Quoted Identifier / Positive', function () {
+describe('Quoted Identifier / Positive', () => {
 
-    it('must handle empty content correctly', function () {
+    it('must handle empty content correctly', () => {
         expect(minify('""')).toBe('""');
         expect(minify('" "')).toBe('" "');
         expect(minify('"   "')).toBe('"   "');
     });
 
-    it('must provide correct spacing', function () {
+    it('must provide correct spacing', () => {
         expect(minify(' "" ')).toBe('""');
         expect(minify('"text"')).toBe('"text"');
         expect(minify('"  text  "')).toBe('"  text  "');
@@ -22,12 +22,12 @@ describe('Quoted Identifier / Positive', function () {
         expect(minify(' first   ""   second ')).toBe('first "" second');
     });
 
-    it('must allow single-quotes inside', function () {
+    it('must allow single-quotes inside', () => {
         expect(minify('"\'some\'text\'"')).toBe('"\'some\'text\'"');
     });
 });
 
-describe('Quoted Identifier / Negative', function () {
+describe('Quoted Identifier / Negative', () => {
 
     function getError(sql) {
         try {
@@ -37,8 +37,8 @@ describe('Quoted Identifier / Negative', function () {
         }
     }
 
-    it('must report unclosed quotes', function () {
-        var e = getError('"');
+    it('must report unclosed quotes', () => {
+        const e = getError('"');
         expect(e instanceof errorLib.SQLParsingError);
         expect(e.code).toBe(PEC.unclosedQI);
         expect(e.position).toEqual({
@@ -47,8 +47,8 @@ describe('Quoted Identifier / Negative', function () {
         });
     });
 
-    it('must report multi-line quoted identifiers', function () {
-        var e = getError('"' + LB + '"');
+    it('must report multi-line quoted identifiers', () => {
+        const e = getError('"' + LB + '"');
         expect(e instanceof errorLib.SQLParsingError);
         expect(e.code).toBe(PEC.multiLineQI);
         expect(e.position).toEqual({

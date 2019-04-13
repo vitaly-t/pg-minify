@@ -2,8 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5",
-    "sourceMap": true,
+    "target": "es6",
     "noImplicitAny": true
   },
   "exclude": [

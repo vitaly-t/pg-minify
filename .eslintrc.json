@@ -1,14 +1,14 @@
 {
   "env": {
-    "es6": false,
+    "es6": true,
     "node": true,
     "jasmine": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
-    "sourceType": "module"
   },
   "rules": {
+    "prefer-arrow-callback": "error",
     "no-else-return": "error",
     "no-multi-spaces": "error",
     "no-whitespace-before-property": "error",
@@ -16,7 +16,12 @@
     "new-cap": "error",
     "no-console": "error",
     "comma-dangle": "error",
+    "no-var": "error",
     "no-shadow": "error",
+    "object-shorthand": [
+      "error",
+      "properties"
+    ],
     "indent": [
       "error",
       4,
