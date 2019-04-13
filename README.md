@@ -35,9 +35,9 @@ $ npm install pg-minify
 ## Usage
 
 ```js
-var minify = require('pg-minify');
+const minify = require('pg-minify');
 
-var sql = 'SELECT 1; -- comments';
+const sql = 'SELECT 1; -- comments';
 
 minify(sql); //=> SELECT 1;
 ```
@@ -45,7 +45,7 @@ minify(sql); //=> SELECT 1;
 with compression (removes all unnecessary spaces):
 
 ```js
-var sql = 'SELECT * FROM "table" WHERE col = 123; -- comments';
+const sql = 'SELECT * FROM "table" WHERE col = 123; -- comments';
 
 minify(sql, {compress: true});
 //=> SELECT*FROM"table"WHERE col=123;
@@ -95,7 +95,7 @@ $ npm run coverage
 
 ## License
 
-Copyright © 2018 [Vitaly Tomilov](https://github.com/vitaly-t);
+Copyright © 2019 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
 [SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L24

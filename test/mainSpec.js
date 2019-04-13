@@ -1,22 +1,22 @@
 'use strict';
 
-var LB = require('os').EOL;
-var minify = require('../lib');
-var errorLib = require('../lib/error');
-var PEC = errorLib.parsingErrorCode;
+const LB = require('os').EOL;
+const minify = require('../lib');
+const errorLib = require('../lib/error');
+const PEC = errorLib.parsingErrorCode;
 
-describe('Minify/Positive', function () {
+describe('Minify/Positive', () => {
 
-    describe('single-line comment', function () {
-        it('must return an empty string', function () {
+    describe('single-line comment', () => {
+        it('must return an empty string', () => {
             expect(minify('--comment')).toBe('');
             expect(minify('--comment' + LB)).toBe('');
             expect(minify(LB + '--comment')).toBe('');
         });
     });
 
-    describe('single-line comment with a prefix', function () {
-        it('must return the prefix', function () {
+    describe('single-line comment with a prefix', () => {
+        it('must return the prefix', () => {
             expect(minify('text--comment')).toBe('text');
             expect(minify(' text --comment')).toBe('text');
             expect(minify('text' + LB + '--comment')).toBe('text');
@@ -25,37 +25,37 @@ describe('Minify/Positive', function () {
         });
     });
 
-    describe('single-line comment with a suffix', function () {
-        it('must return the suffix', function () {
+    describe('single-line comment with a suffix', () => {
+        it('must return the suffix', () => {
             expect(minify('--comment' + LB + 'text')).toBe('text');
             expect(minify('--comment' + LB + ' text ')).toBe('text');
         });
     });
 
-    describe('comments in strings', function () {
-        it('must be skipped', function () {
+    describe('comments in strings', () => {
+        it('must be skipped', () => {
             expect(minify('\'--comment\'')).toBe('\'--comment\'');
             expect(minify('\'--comment' + LB + 'text\'')).toBe('E\'--comment\\ntext\'');
             expect(minify('\'/*comment*/\'')).toBe('\'/*comment*/\'');
         });
     });
 
-    describe('comments in identifiers', function () {
-        it('must be skipped', function () {
+    describe('comments in identifiers', () => {
+        it('must be skipped', () => {
             expect(minify('"--comment"')).toBe('"--comment"');
             expect(minify('"/*comment*/"')).toBe('"/*comment*/"');
         });
     });
 
-    describe('empty text', function () {
-        it('must be returned empty', function () {
+    describe('empty text', () => {
+        it('must be returned empty', () => {
             expect(minify('')).toBe('');
             expect(minify('\'\'')).toBe('\'\'');
         });
     });
 
-    describe('multi-line text', function () {
-        it('must be returned with E', function () {
+    describe('multi-line text', () => {
+        it('must be returned with E', () => {
             expect(minify('\'' + LB + '\'')).toBe('E\'\\n\'');
             expect(minify('\'' + LB + LB + '\'')).toBe('E\'\\n\\n\'');
             expect(minify('text \'' + LB + '\'')).toBe('text E\'\\n\'');
@@ -64,34 +64,34 @@ describe('Minify/Positive', function () {
             expect(minify('E\'' + LB + '\'')).toBe('E\'\\n\'');
         });
 
-        it('must truncate text correctly', function () {
+        it('must truncate text correctly', () => {
             expect(minify('\' first ' + LB + ' last \'')).toBe('E\' first\\nlast \'');
             expect(minify('\' first ' + LB + ' second ' + LB + ' third \'')).toBe('E\' first\\nsecond\\nthird \'');
         });
 
-        it('must add a space where necessary', function () {
+        it('must add a space where necessary', () => {
             expect(minify('select\'\nvalue\'')).toBe('select E\'\\nvalue\'');
         });
 
-        it('must not add a space to an empty string', function () {
+        it('must not add a space to an empty string', () => {
             expect(minify('\'\nvalue\'')).toBe('E\'\\nvalue\'');
         });
 
     });
 
-    describe('Special Comment', function () {
+    describe('Special Comment', () => {
 
-        describe('without compression', function () {
+        describe('without compression', () => {
             expect(minify('/*!text*/')).toBe('/*!text*/');
         });
 
-        describe('with compression', function () {
+        describe('with compression', () => {
             expect(minify('prefix /*!text*/ suffix', {compress: true})).toBe('prefix/*!text*/suffix');
         });
     });
 
-    describe('tabs in text', function () {
-        it('must be replaced', function () {
+    describe('tabs in text', () => {
+        it('must be replaced', () => {
             expect(minify('\t')).toBe('');
             expect(minify('\'\t\'')).toBe('E\'\\t\'');
             expect(minify('\'\\t\'')).toBe('\'\\t\'');
@@ -100,8 +100,8 @@ describe('Minify/Positive', function () {
         });
     });
 
-    describe('quotes in strings', function () {
-        it('must be ignored', function () {
+    describe('quotes in strings', () => {
+        it('must be ignored', () => {
             expect(minify('text\'\'')).toBe('text\'\'');
             expect(minify('text \'\'')).toBe('text \'\'');
             expect(minify('\'\'\'\'')).toBe('\'\'\'\'');
@@ -109,8 +109,8 @@ describe('Minify/Positive', function () {
         });
     });
 
-    describe('redundant gaps', function () {
-        it('must be all replaced with a single space', function () {
+    describe('redundant gaps', () => {
+        it('must be all replaced with a single space', () => {
             expect(minify('a  b')).toBe('a b');
             expect(minify(' a     b ')).toBe('a b');
             expect(minify('a\tb')).toBe('a b');
@@ -119,8 +119,8 @@ describe('Minify/Positive', function () {
         });
     });
 
-    describe('with multiple lines', function () {
-        it('must be ignored', function () {
+    describe('with multiple lines', () => {
+        it('must be ignored', () => {
             expect(minify('--comment' + LB + LB + 'text')).toBe('text');
             expect(minify('/*start' + LB + 'end*/')).toBe('');
             expect(minify('/*start' + LB + 'end*/text')).toBe('text');
@@ -135,7 +135,7 @@ describe('Minify/Positive', function () {
 
 });
 
-describe('Minify/Negative', function () {
+describe('Minify/Negative', () => {
 
     function errorCode(sql) {
         try {
@@ -154,51 +154,51 @@ describe('Minify/Negative', function () {
         return null;
     }
 
-    describe('passing non-text', function () {
-        var errMsg = 'Input SQL must be a text string.';
-        it('must throw an error', function () {
-            expect(function () {
+    describe('passing non-text', () => {
+        const errMsg = 'Input SQL must be a text string.';
+        it('must throw an error', () => {
+            expect(() => {
                 minify();
-            }).toThrow(new TypeError(errMsg));
-            expect(function () {
+            }).toThrow(errMsg);
+            expect(() => {
                 minify(123);
-            }).toThrow(new TypeError(errMsg));
+            }).toThrow(errMsg);
         });
     });
 
-    describe('passing invalid \'options\'', function () {
-        it('must throw an error', function () {
-            expect(function () {
+    describe('passing invalid \'options\'', () => {
+        it('must throw an error', () => {
+            expect(() => {
                 minify('', 123);
-            }).toThrow(new TypeError('Parameter \'options\' must be an object.'));
+            }).toThrow('Parameter \'options\' must be an object.');
         });
     });
 
-    describe('nested multi-line comments', function () {
+    describe('nested multi-line comments', () => {
         /* Nested comments cannot be implemented without full tokenization,
         * because comments can be inside strings and identifiers, which can be
         * part of SQL as well as regular text, and there is no way of telling
         * which one it is. */
-        it('must report correct error position', function () {
+        it('must report correct error position', () => {
             expect(minify('/*text*/*/')).toBe('*/');
             expect(getErrorPos('/*/*text*/*/').column).toBe(3);
             expect(getErrorPos('/*text/**/').column).toBe(7);
             expect(getErrorPos('hello/*world!/**/').column).toBe(14);
         });
-        it('must ignore closures in text', function () {
+        it('must ignore closures in text', () => {
             expect(errorCode('/*\'*/\'*/')).toBe(PEC.unclosedText);
         });
     });
 
-    describe('quotes in strings', function () {
+    describe('quotes in strings', () => {
 
-        it('must report an error', function () {
+        it('must report an error', () => {
             expect(errorCode('\'')).toBe(PEC.unclosedText);
             expect(errorCode('\'\'\'')).toBe(PEC.unclosedText);
             expect(errorCode('\'\'\' ')).toBe(PEC.unclosedText);
         });
 
-        it('must report positions correctly', function () {
+        it('must report positions correctly', () => {
             expect(getErrorPos('\'').column).toBe(1);
             expect(getErrorPos(' \'').column).toBe(2);
             expect(getErrorPos('s\'').column).toBe(2);
@@ -207,16 +207,16 @@ describe('Minify/Negative', function () {
 
     });
 
-    describe('unclosed multi-lines', function () {
-        it('must report an error', function () {
+    describe('unclosed multi-lines', () => {
+        it('must report an error', () => {
             expect(errorCode('/*')).toBe(PEC.unclosedMLC);
             expect(errorCode('/*text')).toBe(PEC.unclosedMLC);
         });
     });
 
-    describe('toString + inspect', function () {
-        it('must produce the same output', function () {
-            var error;
+    describe('toString + inspect', () => {
+        it('must produce the same output', () => {
+            let error;
             try {
                 minify('\'test');
             } catch (e) {
