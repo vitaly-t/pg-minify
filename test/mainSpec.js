@@ -102,9 +102,10 @@ describe('Minify/Positive', () => {
 
     describe('quotes in strings', () => {
         it('must be ignored', () => {
-            expect(minify('text\'\'')).toBe('text\'\'');
+            expect(minify('\'\'')).toBe('\'\'');
             expect(minify('text \'\'')).toBe('text \'\'');
-            expect(minify('\'\'\'\'')).toBe('\'\'\'\'');
+            expect(minify('\'text\\\\\'')).toBe('\'text\\\\\'');
+            expect(minify('\'\'')).toBe('\'\'');
             expect(minify('\'\'\'\'\'\'')).toBe('\'\'\'\'\'\'');
         });
     });
@@ -196,6 +197,7 @@ describe('Minify/Negative', () => {
             expect(errorCode('\'')).toBe(PEC.unclosedText);
             expect(errorCode('\'\'\'')).toBe(PEC.unclosedText);
             expect(errorCode('\'\'\' ')).toBe(PEC.unclosedText);
+            expect(errorCode('\'\\\'')).toBe(PEC.unclosedText);
         });
 
         it('must report positions correctly', () => {
