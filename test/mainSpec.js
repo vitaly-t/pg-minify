@@ -167,14 +167,6 @@ describe('Minify/Negative', () => {
         });
     });
 
-    describe('passing invalid \'options\'', () => {
-        it('must throw an error', () => {
-            expect(() => {
-                minify('', 123);
-            }).toThrow('Parameter \'options\' must be an object.');
-        });
-    });
-
     describe('nested multi-line comments', () => {
         /* Nested comments cannot be implemented without full tokenization,
         * because comments can be inside strings and identifiers, which can be
