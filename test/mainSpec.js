@@ -152,6 +152,7 @@ describe('Minify/Positive', () => {
         it('must support one nested level', () => {
             expect(minify('/*/**/*/')).toBe('');
             expect(minify('1/*/**/*/2')).toBe('12');
+            expect(minify('  1   /*/**/*/   2  ')).toBe('1 2');
         });
         it('must support any depth', () => {
             expect(minify('/*/*/**/*/*/')).toBe('');
