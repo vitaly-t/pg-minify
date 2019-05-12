@@ -74,6 +74,8 @@ Compresses / uglifies the SQL to its bare minimum, by removing all unnecessary s
 * `false (default)` - keep minimum spaces, for easier read
 * `true` - remove all unnecessary spaces 
 
+See also: [SQL Compression].
+
 ## Testing
 
 First, clone the repository and install DEV dependencies.
@@ -94,3 +96,4 @@ Released under the MIT license.
 
 [SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L22
 [TypeScript]:https://github.com/vitaly-t/pg-minify/tree/master/typescript
+[SQL Compression]:https://github.com/vitaly-t/pg-minify/wiki/SQL-Compression

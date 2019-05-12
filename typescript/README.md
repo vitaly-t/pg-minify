@@ -1,19 +1,26 @@
 ## TypeScript for pg-minify
 
-Complete TypeScript 3.x declarations for the [pg-minify] module.
+Complete TypeScript 3.x declarations for the module.
 
 ### Inclusion
 
-Typescript should be able to pick up the definitions without any manual configuration.
+Typescript picks up the definitions without any manual configuration.
 
 ### Usage
 
 ```ts
-import minify from 'pg-minify';
+import * as minify from 'pg-minify';
 
 const sql = 'SELECT 1; -- comments';
 
 minify(sql); //=> SELECT 1;
+```
+
+And if you are using compiler option `"allowSyntheticDefaultImports": true` in your `tsconfig`,
+then you can include it like this:
+
+```ts
+import minify from 'pg-minify';
 ```
 
 [pg-minify]:https://github.com/vitaly-t/pg-minify
