@@ -10,7 +10,7 @@ Minifies PostgreSQL scripts.
 **Features:**
 
 * Removes `/*multi-line*/` (including nested) and `--single-line` comments
-* Preserves special multi-line comments that start with `/*!`
+* Preserves special/copyright multi-line comments that start with `/*!`
 * Concatenates multi-line strings into a single line with `\n`
 * Fixes multi-line text, prefixing it with `E` where needed
 * Removes redundant line gaps: line breaks, tabs and spaces

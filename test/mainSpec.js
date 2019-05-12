@@ -83,11 +83,24 @@ describe('Minify/Positive', () => {
     describe('Special Comment', () => {
 
         describe('without compression', () => {
-            expect(minify('/*!text*/')).toBe('/*!text*/');
+            it('must keep spaces', () => {
+                expect(minify('prefix /*!text*/ suffix')).toBe('prefix /*!text*/ suffix');
+            });
         });
 
         describe('with compression', () => {
-            expect(minify('prefix /*!text*/ suffix', {compress: true})).toBe('prefix/*!text*/suffix');
+            it('must remove spaces', () => {
+                expect(minify('prefix /*!text*/ suffix', {compress: true})).toBe('prefix/*!text*/suffix');
+            });
+        });
+
+        describe('with nested comments', () => {
+            it('must keep the inner comments', () => {
+                expect(minify('/*!one/*two*/*/')).toBe('/*!one/*two*/*/');
+                expect(minify('/*!one/*/*/*two*/*/*/*/')).toBe('/*!one/*/*/*two*/*/*/*/');
+                expect(minify('prefix /*!one/*two*/*/ suffix')).toBe('prefix /*!one/*two*/*/ suffix');
+                expect(minify('prefix /*!one/*two*/*/ suffix', {compress: true})).toBe('prefix/*!one/*two*/*/suffix');
+            });
         });
     });
 
