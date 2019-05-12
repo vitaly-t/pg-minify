@@ -1,6 +1,6 @@
 ## TypeScript for pg-minify
 
-Complete TypeScript 2.x/3.x declarations for the [pg-minify] module.
+Complete TypeScript 3.x declarations for the [pg-minify] module.
 
 ### Inclusion
 
@@ -9,7 +9,7 @@ Typescript should be able to pick up the definitions without any manual configur
 ### Usage
 
 ```ts
-import * as minify from 'pg-minify';
+import minify from 'pg-minify';
 
 const sql = 'SELECT 1; -- comments';
 
