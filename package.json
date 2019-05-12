@@ -1,6 +1,6 @@
 {
   "name": "pg-minify",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Minifies PostgreSQL scripts.",
   "main": "lib/index.js",
   "typings": "typescript/pg-minify.d.ts",

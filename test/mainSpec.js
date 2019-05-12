@@ -134,6 +134,19 @@ describe('Minify/Positive', () => {
         });
     });
 
+    describe('nested multi-line comments', () => {
+        it('must support one nested level', () => {
+            expect(minify('/*/**/*/')).toBe('');
+            expect(minify('1/*/**/*/2')).toBe('12');
+        });
+        it('must support any depth', () => {
+            expect(minify('/*/*/**/*/*/')).toBe('');
+            expect(minify('/*/*/*/*/**/*/*/*/*/')).toBe('');
+            expect(minify('1/*/*/*/*/**/*/*/*/*/2')).toBe('12');
+            expect(minify('1/*/*/*/**/*/*/*/2/*/*0*/*/3')).toBe('123');
+        });
+    });
+
 });
 
 describe('Minify/Negative', () => {
@@ -168,14 +181,10 @@ describe('Minify/Negative', () => {
     });
 
     describe('nested multi-line comments', () => {
-        /* Nested comments cannot be implemented without full tokenization,
-        * because comments can be inside strings and identifiers, which can be
-        * part of SQL as well as regular text, and there is no way of telling
-        * which one it is. */
         it('must report correct error position', () => {
             expect(minify('/*text*/*/')).toBe('*/');
-            expect(getErrorPos('/*/*text*/*/').column).toBe(3);
             expect(getErrorPos('/*text/**/').column).toBe(7);
+            expect(getErrorPos('/*text/*/*').column).toBe(9);
             expect(getErrorPos('hello/*world!/**/').column).toBe(14);
         });
         it('must ignore closures in text', () => {
