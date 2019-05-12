@@ -16,7 +16,7 @@ const sql = 'SELECT 1; -- comments';
 minify(sql); //=> SELECT 1;
 ```
 
-And if you are using compiler option `"allowSyntheticDefaultImports": true` in your `tsconfig`,
+And if you are using `"allowSyntheticDefaultImports": true` in your `tsconfig`,
 then you can include it like this:
 
 ```ts
