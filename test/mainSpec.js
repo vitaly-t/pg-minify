@@ -4,6 +4,7 @@ const LB = require('os').EOL;
 const minify = require('../lib');
 const errorLib = require('../lib/error');
 const PEC = errorLib.parsingErrorCode;
+const util = require('util');
 
 describe('Minify/Positive', () => {
 
@@ -225,8 +226,9 @@ describe('Minify/Negative', () => {
             } catch (e) {
                 error = e;
             }
-            expect(error.toString()).toBe(error.inspect());
-            expect(error.toString(1) != error.inspect()).toBe(true);
+            const fromCustom = util.inspect.custom ? error[util.inspect.custom]() : error.custom();
+            expect(error.toString()).toBe(fromCustom);
+            expect(error.toString(1) != fromCustom).toBe(true);
         });
     });
 });
