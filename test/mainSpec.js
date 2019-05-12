@@ -226,7 +226,7 @@ describe('Minify/Negative', () => {
             } catch (e) {
                 error = e;
             }
-            const fromCustom = util.inspect.custom ? error[util.inspect.custom]() : error.custom();
+            const fromCustom = util.inspect.custom ? error[util.inspect.custom]() : error.inspect();
             expect(error.toString()).toBe(fromCustom);
             expect(error.toString(1) != fromCustom).toBe(true);
         });
