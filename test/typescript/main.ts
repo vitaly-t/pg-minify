@@ -1,4 +1,4 @@
-import * as minify from '../../typescript/pg-minify';
+import minify from '../../typescript/pg-minify';
 
 const s1 = minify('select * from table; --comment');
 const s2 = minify('select * from table; --comment', {});
