@@ -160,11 +160,6 @@ describe('Minify/Positive', () => {
             expect(minify('1/*/*/*/*/**/*/*/*/*/2')).toBe('12');
             expect(minify('1/*/*/*/**/*/*/*/2/*/*0*/*/3')).toBe('123');
         });
-        it('must ignore closures inside text/identifiers', () => {
-            // TODO: Needs to be implemented:
-            // expect(minify('1/*0\'*/\'*//2')).toBe('12');
-            // expect(minify('3/*0"*/"*//4')).toBe('34');
-        });
     });
 
 });
@@ -234,6 +229,29 @@ describe('Minify/Negative', () => {
         it('must report an error', () => {
             expect(errorCode('/*')).toBe(PEC.unclosedMLC);
             expect(errorCode('/*text')).toBe(PEC.unclosedMLC);
+        });
+    });
+
+    describe('multi-line-like symbols in text/identifiers', () => {
+        // This behaviour is consistent with how PostgreSQL does it:
+        // what's inside multi-line comment does not adhere to any format,
+        // and to be considered as plain text, so if comment-like entries
+        // are present, they are expected to affect the comment block.
+        it('must throw on extra openers', () => {
+            expect(() => {
+                minify('1/*0\'/*\'*//2');
+            }).toThrow('Error parsing SQL at {line:1,col:6}: Unclosed multi-line comment.');
+            expect(() => {
+                minify('3/*0"/*"*//4');
+            }).toThrow('Error parsing SQL at {line:1,col:6}: Unclosed multi-line comment.');
+        });
+        it('must throw on extra closures', () => {
+            expect(() => {
+                minify('1/*0\'*/\'*//2');
+            }).toThrow('Error parsing SQL at {line:1,col:8}: Unclosed text block.');
+            expect(() => {
+                minify('3/*0"*/"*//4');
+            }).toThrow('Error parsing SQL at {line:1,col:8}: Unclosed quoted identifier.');
         });
     });
 
