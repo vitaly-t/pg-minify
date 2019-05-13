@@ -160,6 +160,11 @@ describe('Minify/Positive', () => {
             expect(minify('1/*/*/*/*/**/*/*/*/*/2')).toBe('12');
             expect(minify('1/*/*/*/**/*/*/*/2/*/*0*/*/3')).toBe('123');
         });
+        it('must ignore closures inside text/identifiers', () => {
+            // TODO: Needs to be implemented:
+            // expect(minify('1/*0\'*/\'*//2')).toBe('12');
+            // expect(minify('3/*0"*/"*//4')).toBe('34');
+        });
     });
 
 });
