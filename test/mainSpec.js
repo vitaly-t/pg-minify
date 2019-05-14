@@ -102,6 +102,15 @@ describe('Minify/Positive', () => {
                 expect(minify('prefix /*!one/*two*/*/ suffix', {compress: true})).toBe('prefix/*!one/*two*/*/suffix');
             });
         });
+
+        describe('with removeAll option set', () => {
+            const opt = {removeAll: true};
+            it('must remove special comments', () => {
+                expect(minify('/*!one/*two*/*/', opt)).toBe('');
+                expect(minify('1/*!one/*/*/*two*/*/*/*/2', opt)).toBe('12');
+                expect(minify('prefix /*!one/*two*/*/ suffix', opt)).toBe('prefix suffix');
+            });
+        });
     });
 
     describe('tabs in text', () => {
