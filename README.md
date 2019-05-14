@@ -71,10 +71,14 @@ Minifies SQL into a single line, according to the `options`.
 
 Compresses / uglifies the SQL to its bare minimum, by removing all unnecessary spaces.
 
-* `false (default)` - keep minimum spaces, for easier read
-* `true` - remove all unnecessary spaces 
+* `false (default)` - keeps minimum spaces, for easier read
+* `true` - removes all unnecessary spaces 
 
 See also: [SQL Compression].
+
+##### options.removeAll ⇒ Boolean
+
+Removes everything, i.e. special/copyright multi-line comments that start with `/*!` will be removed as well.
 
 ## Testing
 

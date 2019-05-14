@@ -1,11 +1,12 @@
 ////////////////////////////////////////
-// For pg-minify v1.2.1 or later.
+// For pg-minify v1.3.0 or later.
 ////////////////////////////////////////
 
 declare namespace pgMinify {
 
     type minifyOptions = {
         compress?: boolean;
+        removeAll?: boolean;
     };
 
     interface IErrorPosition {
