@@ -78,8 +78,7 @@ See also: [SQL Compression].
 
 ##### options.removeAll ⇒ Boolean
 
-Removes everything, without exception, i.e. special/copyright multi-line comments
-that start with `/*!` will be removed as well.
+Removes everything, i.e. special/copyright multi-line comments that start with `/*!` will be removed as well.
 
 ## Testing
 
