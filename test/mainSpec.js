@@ -8,6 +8,13 @@ const util = require('util');
 
 describe('Minify/Positive', () => {
 
+    describe('end-of-line detection', () => {
+        it('must not depend on the frequency', () => {
+            // TODO: This test is currently useless.
+            expect(minify('\'\r\n\r\n \n\'')).toBe('E\'\\n\\n\\n\'');
+        });
+    });
+
     describe('single-line comment', () => {
         it('must return an empty string', () => {
             expect(minify('--comment')).toBe('');

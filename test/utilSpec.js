@@ -1,25 +1,6 @@
 'use strict';
 
-const LB = require('os').EOL;
 const utils = require('../lib/utils');
-
-describe('getEOL', () => {
-
-    it('must detect empty text correctly', () => {
-        expect(utils.getEOL('')).toBe(LB);
-        expect(utils.getEOL(' ')).toBe(LB);
-    });
-
-    it('must detect Unix correctly', () => {
-        expect(utils.getEOL('\n')).toBe('\n');
-        expect(utils.getEOL('\r\n\n\n')).toBe('\n');
-    });
-
-    it('must detect Windows correctly', () => {
-        expect(utils.getEOL('\r\n')).toBe('\r\n');
-        expect(utils.getEOL('\r\n\n\r\n')).toBe('\r\n');
-    });
-});
 
 describe('getIndexPos', () => {
 
