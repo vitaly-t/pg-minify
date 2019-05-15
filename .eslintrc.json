@@ -8,6 +8,7 @@
   "parserOptions": {
   },
   "rules": {
+    "semi-spacing": "error",
     "prefer-arrow-callback": "error",
     "no-else-return": "error",
     "no-multi-spaces": "error",
