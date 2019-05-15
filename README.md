@@ -14,7 +14,7 @@ Minifies PostgreSQL scripts, reducing the IO usage.
 * Concatenates multi-line strings into a single line with `\n`
 * Fixes multi-line text, prefixing it with `E` where needed
 * Removes redundant line gaps: line breaks, tabs and spaces
-* Provides basic parsing and error reporting for invalid SQL
+* Provides basic parsing and error detection for invalid SQL
 * Flattens the resulting script into a single line
 * Optionally, compresses SQL for minimum space 
 
