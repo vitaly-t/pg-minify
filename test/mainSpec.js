@@ -9,9 +9,8 @@ const util = require('util');
 describe('Minify/Positive', () => {
 
     describe('end-of-line detection', () => {
-        it('must not depend on the frequency', () => {
-            // TODO: This test is currently useless.
-            expect(minify('\'\r\n\r\n \n\'')).toBe('E\'\\n\\n\\n\'');
+        it('must process correctly inside special comments', () => {
+            expect(minify('/*!\n\nbla\r\n*/')).toBe('/*!\r\n\r\nbla\r\n*/');
         });
     });
 
