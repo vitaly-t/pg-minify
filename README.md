@@ -1,7 +1,7 @@
 pg-minify
 =========
 
-Minifies PostgreSQL scripts.
+Minifies PostgreSQL scripts, reducing the IO usage.
 
 [![Build Status](https://travis-ci.org/vitaly-t/pg-minify.svg?branch=master)](https://travis-ci.org/vitaly-t/pg-minify)
 [![Coverage Status](https://coveralls.io/repos/vitaly-t/pg-minify/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/pg-minify?branch=master)
@@ -17,8 +17,6 @@ Minifies PostgreSQL scripts.
 * Provides basic parsing and error reporting for invalid SQL
 * Flattens the resulting script into a single line
 * Optionally, compresses SQL for minimum space 
-
-This library is originally for PostgreSQL, but works also for MS-SQL and MySQL.
 
 ## Installing
 
