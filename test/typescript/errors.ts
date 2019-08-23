@@ -7,7 +7,7 @@ try {
     const a = <minify.SQLParsingError>error;
     console.log(a.position.line);
 
-    let b: SQLParsingError;
+    let b: SQLParsingError = <SQLParsingError>{};
     const bb = b.position.column;
     console.log(bb);
 }

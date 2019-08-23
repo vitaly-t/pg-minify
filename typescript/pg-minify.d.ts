@@ -1,13 +1,13 @@
 ////////////////////////////////////////
-// For pg-minify v1.3.0 or later.
+// For pg-minify v1.5.0 or later.
 ////////////////////////////////////////
 
 declare namespace pgMinify {
 
-    type minifyOptions = {
+    interface IMinifyOptions {
         compress?: boolean;
         removeAll?: boolean;
-    };
+    }
 
     interface IErrorPosition {
         line: number,
@@ -31,6 +31,6 @@ declare namespace pgMinify {
     }
 }
 
-declare function pgMinify(sql: string, options?: pgMinify.minifyOptions): string;
+declare function pgMinify(sql: string, options?: pgMinify.IMinifyOptions): string;
 
 export = pgMinify;
