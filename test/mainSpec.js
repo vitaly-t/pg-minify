@@ -1,5 +1,3 @@
-'use strict';
-
 const LB = require('os').EOL;
 const minify = require('../lib');
 const errorLib = require('../lib/error');

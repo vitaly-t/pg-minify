@@ -1,5 +1,3 @@
-'use strict';
-
 const minify = require('../lib');
 
 describe('Protocol', () => {

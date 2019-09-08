@@ -1,5 +1,3 @@
-'use strict';
-
 const utils = require('../lib/utils');
 
 describe('getIndexPos', () => {

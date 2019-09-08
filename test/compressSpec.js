@@ -1,5 +1,3 @@
-'use strict';
-
 const LB = require('os').EOL;
 const lib = require('../lib');
 
