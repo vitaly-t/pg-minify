@@ -10,8 +10,8 @@ declare namespace pgMinify {
     }
 
     interface IErrorPosition {
-        line: number,
-        column: number
+        line: number;
+        column: number;
     }
 
     enum parsingErrorCode {
