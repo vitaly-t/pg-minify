@@ -39,9 +39,9 @@ describe('Minify/Positive', () => {
 
     describe('comments in strings', () => {
         it('must be skipped', () => {
-            expect(minify('\'--comment\'')).toBe('\'--comment\'');
-            expect(minify('\'--comment' + LB + 'text\'')).toBe('E\'--comment\\ntext\'');
-            expect(minify('\'/*comment*/\'')).toBe('\'/*comment*/\'');
+            expect(minify(`'--comment'`)).toBe(`'--comment'`);
+            expect(minify(`'--comment` + LB + `text'`)).toBe(`E'--comment\\ntext'`);
+            expect(minify(`'/*comment*/'`)).toBe(`'/*comment*/'`);
         });
     });
 
@@ -55,31 +55,31 @@ describe('Minify/Positive', () => {
     describe('empty text', () => {
         it('must be returned empty', () => {
             expect(minify('')).toBe('');
-            expect(minify('\'\'')).toBe('\'\'');
+            expect(minify(`''`)).toBe(`''`);
         });
     });
 
     describe('multi-line text', () => {
         it('must be returned with E', () => {
-            expect(minify('\'' + LB + '\'')).toBe('E\'\\n\'');
-            expect(minify('\'' + LB + LB + '\'')).toBe('E\'\\n\\n\'');
-            expect(minify('text \'' + LB + '\'')).toBe('text E\'\\n\'');
-            expect(minify('text e\'' + LB + '\'')).toBe('text e\'\\n\'');
-            expect(minify('e\'' + LB + '\'')).toBe('e\'\\n\'');
-            expect(minify('E\'' + LB + '\'')).toBe('E\'\\n\'');
+            expect(minify(`'` + LB + `'`)).toBe(`E'\\n'`);
+            expect(minify(`'` + LB + LB + `'`)).toBe(`E'\\n\\n'`);
+            expect(minify(`text '` + LB + `'`)).toBe(`text E'\\n'`);
+            expect(minify(`text e'` + LB + `'`)).toBe(`text e'\\n'`);
+            expect(minify(`e'` + LB + `'`)).toBe(`e'\\n'`);
+            expect(minify(`E'` + LB + `'`)).toBe(`E'\\n'`);
         });
 
         it('must truncate text correctly', () => {
-            expect(minify('\' first ' + LB + ' last \'')).toBe('E\' first\\nlast \'');
-            expect(minify('\' first ' + LB + ' second ' + LB + ' third \'')).toBe('E\' first\\nsecond\\nthird \'');
+            expect(minify(`' first ` + LB + ` last '`)).toBe(`E' first\\nlast '`);
+            expect(minify(`' first ` + LB + ` second ` + LB + ` third '`)).toBe(`E' first\\nsecond\\nthird '`);
         });
 
         it('must add a space where necessary', () => {
-            expect(minify('select\'\nvalue\'')).toBe('select E\'\\nvalue\'');
+            expect(minify(`select'\nvalue'`)).toBe(`select E'\\nvalue'`);
         });
 
         it('must not add a space to an empty string', () => {
-            expect(minify('\'\nvalue\'')).toBe('E\'\\nvalue\'');
+            expect(minify(`'\nvalue'`)).toBe(`E'\\nvalue'`);
         });
 
     });
@@ -120,20 +120,20 @@ describe('Minify/Positive', () => {
     describe('tabs in text', () => {
         it('must be replaced', () => {
             expect(minify('\t')).toBe('');
-            expect(minify('\'\t\'')).toBe('E\'\\t\'');
-            expect(minify('\'\\t\'')).toBe('\'\\t\'');
-            expect(minify('e\' \t \'')).toBe('e\' \\t \'');
-            expect(minify('\'\t first ' + LB + '\t second \t' + LB + '\t third \t\'')).toBe('E\'\\t first\\nsecond\\nthird \\t\'');
+            expect(minify(`'\t'`)).toBe(`E'\\t'`);
+            expect(minify(`'\\t'`)).toBe(`'\\t'`);
+            expect(minify(`e' \t '`)).toBe(`e' \\t '`);
+            expect(minify(`'\t first ` + LB + `\t second \t` + LB + `\t third \t'`)).toBe(`E'\\t first\\nsecond\\nthird \\t'`);
         });
     });
 
     describe('quotes in strings', () => {
         it('must be ignored', () => {
-            expect(minify('\'\'')).toBe('\'\'');
-            expect(minify('text \'\'')).toBe('text \'\'');
-            expect(minify('\'text\\\\\'')).toBe('\'text\\\\\'');
-            expect(minify('\'\'')).toBe('\'\'');
-            expect(minify('\'\'\'\'\'\'')).toBe('\'\'\'\'\'\'');
+            expect(minify(`''`)).toBe(`''`);
+            expect(minify(`text ''`)).toBe(`text ''`);
+            expect(minify(`'text\\\\'`)).toBe(`'text\\\\'`);
+            expect(minify(`''`)).toBe(`''`);
+            expect(minify(`''''''`)).toBe(`''''''`);
         });
     });
 
@@ -216,24 +216,24 @@ describe('Minify/Negative', () => {
             expect(getErrorPos('hello/*world!/**/').column).toBe(14);
         });
         it('must ignore closures in text', () => {
-            expect(errorCode('/*\'*/\'*/')).toBe(PEC.unclosedText);
+            expect(errorCode(`/*'*/'*/`)).toBe(PEC.unclosedText);
         });
     });
 
     describe('quotes in strings', () => {
 
         it('must report an error', () => {
-            expect(errorCode('\'')).toBe(PEC.unclosedText);
-            expect(errorCode('\'\'\'')).toBe(PEC.unclosedText);
-            expect(errorCode('\'\'\' ')).toBe(PEC.unclosedText);
-            expect(errorCode('\'\\\'')).toBe(PEC.unclosedText);
+            expect(errorCode(`'`)).toBe(PEC.unclosedText);
+            expect(errorCode(`'''`)).toBe(PEC.unclosedText);
+            expect(errorCode(`''' `)).toBe(PEC.unclosedText);
+            expect(errorCode(`'\\'`)).toBe(PEC.unclosedText);
         });
 
         it('must report positions correctly', () => {
-            expect(getErrorPos('\'').column).toBe(1);
-            expect(getErrorPos(' \'').column).toBe(2);
-            expect(getErrorPos('s\'').column).toBe(2);
-            expect(getErrorPos('s \'').column).toBe(3);
+            expect(getErrorPos(`'`).column).toBe(1);
+            expect(getErrorPos(` '`).column).toBe(2);
+            expect(getErrorPos(`s'`).column).toBe(2);
+            expect(getErrorPos(`s '`).column).toBe(3);
         });
 
     });
@@ -252,7 +252,7 @@ describe('Minify/Negative', () => {
         // are present, they are expected to affect the comment block.
         it('must throw on extra openers', () => {
             expect(() => {
-                minify('1/*0\'/*\'*//2');
+                minify(`1/*0'/*'*//2`);
             }).toThrow('Error parsing SQL at {line:1,col:6}: Unclosed multi-line comment.');
             expect(() => {
                 minify('3/*0"/*"*//4');
@@ -260,7 +260,7 @@ describe('Minify/Negative', () => {
         });
         it('must throw on extra closures', () => {
             expect(() => {
-                minify('1/*0\'*/\'*//2');
+                minify(`1/*0'*/'*//2`);
             }).toThrow('Error parsing SQL at {line:1,col:8}: Unclosed text block.');
             expect(() => {
                 minify('3/*0"*/"*//4');
@@ -272,7 +272,7 @@ describe('Minify/Negative', () => {
         it('must produce the same output', () => {
             let error;
             try {
-                minify('\'test');
+                minify(`'test`);
             } catch (e) {
                 error = e;
             }

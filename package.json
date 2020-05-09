@@ -1,6 +1,6 @@
 {
   "name": "pg-minify",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "Minifies PostgreSQL scripts.",
   "main": "lib/index.js",
   "typings": "typescript/pg-minify.d.ts",
@@ -39,7 +39,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=7.6"
+    "node": ">=8.0"
   },
   "devDependencies": {
     "coveralls": "3.1.0",

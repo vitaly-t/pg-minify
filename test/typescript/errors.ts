@@ -2,7 +2,7 @@ import {SQLParsingError} from '../../typescript/pg-minify';
 import minify from '../../typescript/pg-minify';
 
 try {
-    minify('select \'* from table; --comment');
+    minify(`select '* from table; --comment`);
 } catch (error) {
     const a = <minify.SQLParsingError>error;
     console.log(a.position.line);

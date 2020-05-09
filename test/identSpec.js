@@ -21,7 +21,7 @@ describe('Quoted Identifier / Positive', () => {
     });
 
     it('must allow single-quotes inside', () => {
-        expect(minify('"\'some\'text\'"')).toBe('"\'some\'text\'"');
+        expect(minify(`"'some'text'"`)).toBe(`"'some'text'"`);
     });
 });
 

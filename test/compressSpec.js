@@ -36,7 +36,7 @@ describe('Compress', () => {
 
     describe('with a text block', () => {
         it('must remove all gaps', () => {
-            expect(minify('some \'text\' here')).toBe('some\'text\'here');
+            expect(minify(`some 'text' here`)).toBe(`some'text'here`);
         });
     });
 
@@ -48,15 +48,15 @@ describe('Compress', () => {
 
     describe('for multi-line text', () => {
         it('must preserve the prefix space', () => {
-            expect(minify('select \'\nvalue\'', {compress: true})).toBe('select E\'\\nvalue\'');
+            expect(minify(`select '\nvalue'`, {compress: true})).toBe(`select E'\\nvalue'`);
         });
         it('must not add a space to an empty string', () => {
-            expect(minify('\'\nvalue\'', {compress: true})).toBe('E\'\\nvalue\'');
+            expect(minify(`'\nvalue'`, {compress: true})).toBe(`E'\\nvalue'`);
         });
         it('must not add a space after special symbols', () => {
             for (let i = 0; i < compressors.length; i++) {
                 const c = compressors[i];
-                expect(minify(c + '\'\nvalue\'', {compress: true})).toBe(c + 'E\'\\nvalue\'');
+                expect(minify(c + `'\nvalue'`, {compress: true})).toBe(c + `E'\\nvalue'`);
             }
         });
     });
