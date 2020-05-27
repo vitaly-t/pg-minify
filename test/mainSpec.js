@@ -5,7 +5,6 @@ const minify = require('../lib');
 const {parsingErrorCode} = require('../lib/error');
 const PEC = parsingErrorCode;
 
-
 describe('Minify/Positive', () => {
 
     describe('end-of-line detection', () => {
@@ -279,7 +278,14 @@ describe('Minify/Negative', () => {
             err = e.toString();
         }
         it('must contain error', () => {
-            expect(err).toBe(`SQLParsingError {${EOL}${gap}code: parsingErrorCode.unclosedText${EOL}${gap}error: "Unclosed text block."${EOL}${gap}position: {line: 1, col: 1}${EOL}}`);
+            const txt = [
+                `SQLParsingError {`,
+                `${gap}code: parsingErrorCode.unclosedText`,
+                `${gap}error: "Unclosed text block."`,
+                `${gap}position: {line: 1, col: 1}`,
+                `}`
+            ];
+            expect(err).toBe(txt.join(EOL));
         });
     });
 
