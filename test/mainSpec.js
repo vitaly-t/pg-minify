@@ -1,8 +1,10 @@
-const LB = require('os').EOL;
+const {EOL} = require('os');
+const {inspect} = require('util');
+const {messageGap} = require('../lib/utils');
 const minify = require('../lib');
-const errorLib = require('../lib/error');
-const PEC = errorLib.parsingErrorCode;
-const util = require('util');
+const {parsingErrorCode} = require('../lib/error');
+const PEC = parsingErrorCode;
+
 
 describe('Minify/Positive', () => {
 
@@ -15,8 +17,8 @@ describe('Minify/Positive', () => {
     describe('single-line comment', () => {
         it('must return an empty string', () => {
             expect(minify('--comment')).toBe('');
-            expect(minify('--comment' + LB)).toBe('');
-            expect(minify(LB + '--comment')).toBe('');
+            expect(minify('--comment' + EOL)).toBe('');
+            expect(minify(EOL + '--comment')).toBe('');
         });
     });
 
@@ -24,23 +26,23 @@ describe('Minify/Positive', () => {
         it('must return the prefix', () => {
             expect(minify('text--comment')).toBe('text');
             expect(minify(' text --comment')).toBe('text');
-            expect(minify('text' + LB + '--comment')).toBe('text');
-            expect(minify(' text ' + LB + '--comment')).toBe('text');
-            expect(minify('text--comment' + LB)).toBe('text');
+            expect(minify('text' + EOL + '--comment')).toBe('text');
+            expect(minify(' text ' + EOL + '--comment')).toBe('text');
+            expect(minify('text--comment' + EOL)).toBe('text');
         });
     });
 
     describe('single-line comment with a suffix', () => {
         it('must return the suffix', () => {
-            expect(minify('--comment' + LB + 'text')).toBe('text');
-            expect(minify('--comment' + LB + ' text ')).toBe('text');
+            expect(minify('--comment' + EOL + 'text')).toBe('text');
+            expect(minify('--comment' + EOL + ' text ')).toBe('text');
         });
     });
 
     describe('comments in strings', () => {
         it('must be skipped', () => {
             expect(minify(`'--comment'`)).toBe(`'--comment'`);
-            expect(minify(`'--comment` + LB + `text'`)).toBe(`E'--comment\\ntext'`);
+            expect(minify(`'--comment` + EOL + `text'`)).toBe(`E'--comment\\ntext'`);
             expect(minify(`'/*comment*/'`)).toBe(`'/*comment*/'`);
         });
     });
@@ -61,17 +63,17 @@ describe('Minify/Positive', () => {
 
     describe('multi-line text', () => {
         it('must be returned with E', () => {
-            expect(minify(`'` + LB + `'`)).toBe(`E'\\n'`);
-            expect(minify(`'` + LB + LB + `'`)).toBe(`E'\\n\\n'`);
-            expect(minify(`text '` + LB + `'`)).toBe(`text E'\\n'`);
-            expect(minify(`text e'` + LB + `'`)).toBe(`text e'\\n'`);
-            expect(minify(`e'` + LB + `'`)).toBe(`e'\\n'`);
-            expect(minify(`E'` + LB + `'`)).toBe(`E'\\n'`);
+            expect(minify(`'` + EOL + `'`)).toBe(`E'\\n'`);
+            expect(minify(`'` + EOL + EOL + `'`)).toBe(`E'\\n\\n'`);
+            expect(minify(`text '` + EOL + `'`)).toBe(`text E'\\n'`);
+            expect(minify(`text e'` + EOL + `'`)).toBe(`text e'\\n'`);
+            expect(minify(`e'` + EOL + `'`)).toBe(`e'\\n'`);
+            expect(minify(`E'` + EOL + `'`)).toBe(`E'\\n'`);
         });
 
         it('must truncate text correctly', () => {
-            expect(minify(`' first ` + LB + ` last '`)).toBe(`E' first\\nlast '`);
-            expect(minify(`' first ` + LB + ` second ` + LB + ` third '`)).toBe(`E' first\\nsecond\\nthird '`);
+            expect(minify(`' first ` + EOL + ` last '`)).toBe(`E' first\\nlast '`);
+            expect(minify(`' first ` + EOL + ` second ` + EOL + ` third '`)).toBe(`E' first\\nsecond\\nthird '`);
         });
 
         it('must add a space where necessary', () => {
@@ -123,7 +125,7 @@ describe('Minify/Positive', () => {
             expect(minify(`'\t'`)).toBe(`E'\\t'`);
             expect(minify(`'\\t'`)).toBe(`'\\t'`);
             expect(minify(`e' \t '`)).toBe(`e' \\t '`);
-            expect(minify(`'\t first ` + LB + `\t second \t` + LB + `\t third \t'`)).toBe(`E'\\t first\\nsecond\\nthird \\t'`);
+            expect(minify(`'\t first ` + EOL + `\t second \t` + EOL + `\t third \t'`)).toBe(`E'\\t first\\nsecond\\nthird \\t'`);
         });
     });
 
@@ -149,15 +151,15 @@ describe('Minify/Positive', () => {
 
     describe('with multiple lines', () => {
         it('must be ignored', () => {
-            expect(minify('--comment' + LB + LB + 'text')).toBe('text');
-            expect(minify('/*start' + LB + 'end*/')).toBe('');
-            expect(minify('/*start' + LB + 'end*/text')).toBe('text');
+            expect(minify('--comment' + EOL + EOL + 'text')).toBe('text');
+            expect(minify('/*start' + EOL + 'end*/')).toBe('');
+            expect(minify('/*start' + EOL + 'end*/text')).toBe('text');
             expect(minify('start-/*comment*/end')).toBe('start-end');
-            expect(minify('start/*comment*/' + LB + 'end')).toBe('start end');
-            expect(minify('start/*comment*/' + LB + ' end')).toBe('start end');
-            expect(minify('/*comment*/end ' + LB)).toBe('end');
-            expect(minify('/*start' + LB + 'end*/' + LB + 'text')).toBe('text');
-            expect(minify(' /*hello*/ ' + LB + 'next')).toBe('next');
+            expect(minify('start/*comment*/' + EOL + 'end')).toBe('start end');
+            expect(minify('start/*comment*/' + EOL + ' end')).toBe('start end');
+            expect(minify('/*comment*/end ' + EOL)).toBe('end');
+            expect(minify('/*start' + EOL + 'end*/' + EOL + 'text')).toBe('text');
+            expect(minify(' /*hello*/ ' + EOL + 'next')).toBe('next');
         });
     });
 
@@ -268,7 +270,20 @@ describe('Minify/Negative', () => {
         });
     });
 
-    describe('toString + inspect', () => {
+    describe('error inspection', () => {
+        const gap = messageGap(1);
+        let err;
+        try {
+            minify(`'test`);
+        } catch (e) {
+            err = e.toString();
+        }
+        it('must contain error', () => {
+            expect(err).toBe(`SQLParsingError {${EOL}${gap}code: parsingErrorCode.unclosedText${EOL}${gap}error: "Unclosed text block."${EOL}${gap}position: {line: 1, col: 1}${EOL}}`);
+        });
+    });
+
+    describe('toString and inspect', () => {
         it('must produce the same output', () => {
             let error;
             try {
@@ -276,7 +291,7 @@ describe('Minify/Negative', () => {
             } catch (e) {
                 error = e;
             }
-            const fromCustom = util.inspect.custom ? error[util.inspect.custom]() : error.inspect();
+            const fromCustom = inspect.custom ? error[inspect.custom]() : error.inspect();
             expect(error.toString()).toBe(fromCustom);
             expect(error.toString(1) != fromCustom).toBe(true);
         });

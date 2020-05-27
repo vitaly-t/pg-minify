@@ -1,4 +1,4 @@
-const LB = require('os').EOL;
+const {EOL} = require('os');
 const lib = require('../lib');
 
 const compressors = '.,;:()[]=<>+-*/|!?@#';
@@ -18,16 +18,16 @@ describe('Compress', () => {
     describe('with single-line comment', () => {
         it('must remove all gaps', () => {
             expect(minify(' --comment  ')).toBe('');
-            expect(minify(' --comment ' + LB + ' suffix ')).toBe('suffix');
-            expect(minify(' prefix- --comment ' + LB + ' suffix ')).toBe('prefix-suffix');
+            expect(minify(' --comment ' + EOL + ' suffix ')).toBe('suffix');
+            expect(minify(' prefix- --comment ' + EOL + ' suffix ')).toBe('prefix-suffix');
         });
     });
 
     describe('with multi-line comment', () => {
         it('must remove all gaps', () => {
             expect(minify(' /*comment */ ')).toBe('');
-            expect(minify(' /*comment*/ ' + LB + ' suffix ')).toBe('suffix');
-            expect(minify(' prefix- /*comment */ ' + LB + ' suffix ')).toBe('prefix-suffix');
+            expect(minify(' /*comment*/ ' + EOL + ' suffix ')).toBe('suffix');
+            expect(minify(' prefix- /*comment */ ' + EOL + ' suffix ')).toBe('prefix-suffix');
         });
         it('must preserve the minimum gaps', () => {
             expect(minify('select /*comment */1')).toBe('select 1');

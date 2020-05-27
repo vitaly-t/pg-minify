@@ -1,7 +1,8 @@
-const LB = require('os').EOL;
+const {EOL} = require('os');
 const minify = require('../lib');
-const errorLib = require('../lib/error');
-const PEC = errorLib.parsingErrorCode;
+const {SQLParsingError, parsingErrorCode} = require('../lib/error');
+
+const PEC = parsingErrorCode;
 
 describe('Quoted Identifier / Positive', () => {
 
@@ -36,8 +37,8 @@ describe('Quoted Identifier / Negative', () => {
     }
 
     it('must report unclosed quotes', () => {
-        const e = getError('"');
-        expect(e instanceof errorLib.SQLParsingError);
+        const e = getError(`"`);
+        expect(e instanceof SQLParsingError);
         expect(e.code).toBe(PEC.unclosedQI);
         expect(e.position).toEqual({
             line: 1,
@@ -46,8 +47,8 @@ describe('Quoted Identifier / Negative', () => {
     });
 
     it('must report multi-line quoted identifiers', () => {
-        const e = getError('"' + LB + '"');
-        expect(e instanceof errorLib.SQLParsingError);
+        const e = getError(`"${EOL}"`);
+        expect(e instanceof SQLParsingError);
         expect(e.code).toBe(PEC.multiLineQI);
         expect(e.position).toEqual({
             line: 1,

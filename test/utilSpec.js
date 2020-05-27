@@ -1,9 +1,9 @@
-const utils = require('../lib/utils');
+const {getIndexPos} = require('../lib/utils');
 
 describe('getIndexPos', () => {
 
     function pos(text, idx) {
-        return utils.getIndexPos(text, idx, '\r\n');
+        return getIndexPos(text, idx, '\r\n');
     }
 
     it('must work from the start', () => {
