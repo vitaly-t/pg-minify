@@ -1,11 +1,11 @@
 {
   "env": {
-    "es6": true,
     "node": true,
     "jasmine": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
+    "ecmaVersion": "2020"
   },
   "rules": {
     "semi-spacing": "error",

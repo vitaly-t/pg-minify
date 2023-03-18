@@ -3,10 +3,6 @@ pg-minify
 
 Minifies PostgreSQL scripts, reducing the IO usage.
 
-[![Build Status](https://travis-ci.org/vitaly-t/pg-minify.svg?branch=master)](https://travis-ci.org/vitaly-t/pg-minify)
-[![Coverage Status](https://coveralls.io/repos/vitaly-t/pg-minify/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/pg-minify?branch=master)
-[![Join the chat at https://gitter.im/vitaly-t/pg-minify](https://badges.gitter.im/vitaly-t/pg-minify.svg)](https://gitter.im/vitaly-t/pg-minify?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 **Features:**
 
 * Removes `/*multi-line*/` (including nested) and `--single-line` comments

@@ -1,6 +1,6 @@
 ## TypeScript for pg-minify
 
-Complete TypeScript 3.x (`strict` mode) declarations for the module.
+Complete TypeScript 5.x (`strict` mode) declarations for the module.
 
 ### Inclusion
 
