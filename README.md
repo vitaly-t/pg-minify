@@ -1,7 +1,7 @@
 pg-minify
 =========
 
-[![.github/workflows/ci.yml](https://github.com/vitaly-t/pg-minify/actions/workflows/ci.yml/badge.svg)](https://github.com/vitaly-t/pg-minify/actions/workflows/ci.yml)
+[![Build Status](https://github.com/vitaly-t/pg-minify/actions/workflows/ci.yml/badge.svg)](https://github.com/vitaly-t/pg-minify/actions/workflows/ci.yml)
 [![Node Version](https://img.shields.io/badge/nodejs-14%20--%2020-green.svg?logo=node.js&style=flat)](https://nodejs.org)
 
 Minifies PostgreSQL scripts, reducing the IO usage.

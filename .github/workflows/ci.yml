@@ -26,7 +26,6 @@ jobs:
 
       # GitHub Actions do not use a TTY, which is required for util.inspect to
       # output in color, so use script to force a TTY.
-      - name: Running Tests
       - run: npm test
         # Workaround for No TTY issue
         shell: 'script -qec "bash {0}"'
