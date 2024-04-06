@@ -13,12 +13,12 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node-version: [14.x, 20.x]
+        node-version: [16.x, 20.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -27,6 +27,6 @@ jobs:
       # GitHub Actions do not use a TTY, which is required for util.inspect to
       # output in color, so use script to force a TTY.
       - name: Running Tests
-      - run: npm run test
+      - run: npm test
         # Workaround for No TTY issue
         shell: 'script -qec "bash {0}"'
