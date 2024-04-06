@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "typings": "typescript/pg-minify.d.ts",
   "scripts": {
-    "test": "jasmine-node --captureExceptions test",
+    "test": "jasmine-node --captureExceptions test --force",
     "lint": "eslint ./lib ./test/*.js"
   },
   "files": [
