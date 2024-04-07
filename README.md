@@ -77,19 +77,6 @@ See also: [SQL Compression].
 
 Removes everything, i.e. special/copyright multi-line comments that start with `/*!` will be removed as well.
 
-## Testing
-
-First, clone the repository and install DEV dependencies.
-
-```
-$ npm test
-```
-
-Testing with coverage:
-```
-$ npm run coverage
-```
-
 ## License
 
 Copyright © 2020 [Vitaly Tomilov](https://github.com/vitaly-t);
