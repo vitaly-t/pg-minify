@@ -79,8 +79,8 @@ Removes everything, i.e. special/copyright multi-line comments that start with `
 
 ## Limitations
 
-Double-dollar `$$` string escaping, which avoids escaping single quotes is not supported.
-See [issue #12](https://github.com/vitaly-t/pg-minify/issues/12).
+Double-dollar `$$` string escaping, which avoids escaping single quotes, is not supported.
+See [#12](https://github.com/vitaly-t/pg-minify/issues/12).
 
 ## License
 
