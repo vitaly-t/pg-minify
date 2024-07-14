@@ -22,7 +22,7 @@ describe('Quoted Identifier / Positive', () => {
     });
 
     it('must allow single-quotes inside', () => {
-        expect(minify(`"'some'text'"`)).toBe(`"'some'text'"`);
+        expect(minify('"\'some\'text\'"')).toBe('"\'some\'text\'"');
     });
 });
 
@@ -37,7 +37,7 @@ describe('Quoted Identifier / Negative', () => {
     }
 
     it('must report unclosed quotes', () => {
-        const e = getError(`"`);
+        const e = getError('"');
         expect(e instanceof SQLParsingError);
         expect(e.code).toBe(PEC.unclosedQI);
         expect(e.position).toEqual({
