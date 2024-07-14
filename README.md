@@ -77,6 +77,11 @@ See also: [SQL Compression].
 
 Removes everything, i.e. special/copyright multi-line comments that start with `/*!` will be removed as well.
 
+## Limitations
+
+This library doesn't support `$$` - string escaping, in which you can avoid escaping single quotes correctly.
+See [issue #12](https://github.com/vitaly-t/pg-minify/issues/12).
+
 ## License
 
 Copyright © 2020 [Vitaly Tomilov](https://github.com/vitaly-t);
