@@ -84,7 +84,7 @@ See [#12](https://github.com/vitaly-t/pg-minify/issues/12).
 
 ## License
 
-Copyright © 2020 [Vitaly Tomilov](https://github.com/vitaly-t);
+Copyright © 2025 [Vitaly Tomilov](https://github.com/vitaly-t);
 Released under the MIT license.
 
 [SQLParsingError]:https://github.com/vitaly-t/pg-minify/blob/master/lib/error.js#L22
